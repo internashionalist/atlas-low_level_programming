@@ -20,13 +20,13 @@ int main(void)
 	{
 		printf("and is greater than 5\n");
 	}
-	else if (z == 0)
+	else if (x < 6 && x != 0)
 	{
-		printf("and is 0\n");
+		printf("and is less than 6 and not 0\n");
 	}
-	else (z != 0 && z < 6)
+	else (z == 0)
 	{
-		printf("and is less than 6 and not 0\n", n);
+		printf("and is 0\n", n);
 	}
 	return (0);
 }
