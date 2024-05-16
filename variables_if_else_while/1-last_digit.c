@@ -26,7 +26,7 @@ int main(void)
 	}
 	if (z == 0)
 	{
-		printf("and is 0\n", n);
+		printf("and is 0\n");
 	}
 	return (0);
 }
