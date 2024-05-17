@@ -8,11 +8,6 @@
 
 int main(void)
 {
-	char *str = "_putchar";
-
-	while (*str)
-	{
-		_putchar(*str++);
-	}
-	return (0);
+    write(1, "_putchar\n", 9);
+    return (0);
 }
