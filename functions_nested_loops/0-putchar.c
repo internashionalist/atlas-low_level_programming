@@ -7,7 +7,11 @@
  */
 
 int main(void)
-{
-	fwrite(1, "_putchar\n", 9);
-	return (0);
+
+	char *str = "_putchar\n";
+	while (*str)
+	{
+		_putchar(*str++);
+	}
+	return (0)
 }
