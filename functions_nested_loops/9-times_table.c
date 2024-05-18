@@ -25,5 +25,6 @@ void times_table(void)
 
 			_putchar((ab % 10) + '0');
 		}
+		_putchar('\n');
 	}
 }
