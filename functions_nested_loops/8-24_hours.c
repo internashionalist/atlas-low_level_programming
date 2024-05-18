@@ -19,7 +19,7 @@ void jack_bauer(void)
 			_putchar(':');
 			_putchar((MIN / 10) + '0');
 			_putchar((MIN % 10) + '0');
-			_putchar(\n);
+			_putchar('\n');
 		}
 	}
 }
