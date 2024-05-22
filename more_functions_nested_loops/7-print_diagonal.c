@@ -4,7 +4,7 @@
 * print_diagonal - draws a diagonal line
 * @n: \s
 *
-* Return: 0
+* Return: void
 */
 
 void print_diagonal(int n)
