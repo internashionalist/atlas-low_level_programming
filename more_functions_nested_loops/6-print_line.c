@@ -1,0 +1,12 @@
+#include "main.h"
+
+/**
+* print_line - draws a 'line' n times
+* @n: number of _s to print
+*
+* Return: 0
+*/
+
+void print_line(int n)
+{
+}
