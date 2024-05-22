@@ -28,6 +28,4 @@ void puts_half(char *str)
 	{
 		_putchar(str[k]);
 	}
-
-	_putchar('\n');
 }
