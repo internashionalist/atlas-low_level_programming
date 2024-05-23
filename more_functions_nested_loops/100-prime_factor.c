@@ -8,23 +8,25 @@
  */
 
 int main(void)
-
 {
-	long long i = 612852475143;
+	long p = 612852475143, i;
 
-	while (i % 2 == 0)
+	while (i < (p / 2))
 	{
-		i /= 2;
+		if ((p % 2) == 0)
+		{
+			p /= 2;
+			continue;
+		}
+
+		for (i = 3; i < (p / 2); i += 2)
+		{
+			if ((p % i) == 0)
+				p /= i;
+		}
 	}
 
-	for (long long k = 3; k * k <= num; k += 2)
-	{
-		while (i % k == 0)
-	{
-		i /= k;
-	}
-}
-	printf("%lld\n", i);
+	printf("%ld\n", p);
 
 	return (0);
 }
