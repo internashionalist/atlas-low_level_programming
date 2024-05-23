@@ -1,6 +1,4 @@
 #include "main.h"
-#include "_putchar.c"
-#include "101-main.c"
 
 /**
  * print_number - prints an integer.
