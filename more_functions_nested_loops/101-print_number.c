@@ -9,7 +9,11 @@
 
 void print_number(int n)
 {
-	int digit;
+	if (n == 0)
+	{
+		_putchar('0');
+		return;
+	}
 
 	if (n < 0)
 	{
@@ -19,9 +23,7 @@ void print_number(int n)
 
 	while (n > 0)
 	{
-		digit = n % 10;
+		_putchar((n % 10) + '0');
 		n /= 10;
-	
-	_putchar(digit + '0');
 	}
 }
