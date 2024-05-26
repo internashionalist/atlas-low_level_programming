@@ -12,7 +12,7 @@
 void generate_password(int sum)
 {
 	srand(time(0)); /* seed */
-	char password[100]; /* password under 100 char */
+	char password; /* password under 100 char */
 	int i = 0, ascii_val; /* position tracker, ASCII value */
 
 	while (sum > 0)
