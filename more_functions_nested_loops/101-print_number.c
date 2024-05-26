@@ -4,28 +4,27 @@
  * print_number - prints an integer.
  * @n: integer given to be printed
  *
- * Return: void
  */
 
 void print_number(int n)
 {
-	unsigned int m;
+	unsigned int n2;
 
 	if (n < 0)
 	{
-		m = -n;
+		n2 = -n;
 		_putchar('-');
 	} 
 
 	else
 	{
-		m = n;
+		n2 = n;
 	}
 
-	if (m / 10)
+	if (n2 / 10)
 	{
-		print_number(m / 10);
+		print_number(n2 / 10);
 	}
 
-	_putchar((m % 10) + '0');
+	_putchar((n2 % 10) + '0');
 }
