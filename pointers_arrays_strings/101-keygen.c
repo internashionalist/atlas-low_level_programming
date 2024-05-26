@@ -4,35 +4,43 @@
 #include <time.h>
 
 /*
- * main - generates random valid passwords for the program 101-crackme
+ * generate_password - generates valid passwords for program 101-crackme
  *
- * Return: 0
+ * Return: void
  */
 
 void generate_password(int sum)
 {
-	srand(time(0)); /* seed */
-	char password; /* password under 100 char */
-	int i = 0, ascii_val; /* position tracker, ASCII value */
+	int ascii_value, i = 0;
+	char password[100];
+
+	srand(time(NULL));
 
 	while (sum > 0)
 	{
-		ascii_val = (rand() % 94) + 33; /* random ASCII value */
-		if (sum - ascii_val >= 33 || sum - ascii_val == 0) /* if valid value */
+		ascii_value = (rand() % 94) + 33;
+
+		if (sum - ascii_value >= 33 || sum - ascii_value == 0)
 		{
-			password[i++] = ascii_val;
-			sum -= ascii_val;
+			password[i++] = (char)ascii_value;
+			sum -= ascii_value;
 		}
 	}
 
-	password[i] = '\0'; /* terminate */
+	password[i] = '\0';
 
 	printf("%s\n", password);
 }
 
+/**
+ * main - actually generates the password
+ *
+ * Return: 0
+ */
+
 int main(void)
 {
-	generate_password(2772); /* do the damn thing */
+	generate_password(2772);
 
 	return (0);
 }
