@@ -10,4 +10,17 @@
 
 void reverse_array(int *a, int n)
 {
+	int *begin = a;
+	int *end = a + (n - 1);
+	int i = *begin;
+
+	while (begin < end)
+	{
+		*begin = *end;
+		*end = i;
+		begin++;
+		end--;
+	}
+}
+
 
