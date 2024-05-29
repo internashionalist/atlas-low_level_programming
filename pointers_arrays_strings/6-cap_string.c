@@ -9,3 +9,11 @@
 
 char *cap_string(char *str)
 {
+	int i = 0;
+	int j;
+	char separator[] = " \t\n,;.!?\"(){}";
+
+	while (str[i])
+	{
+		for (j = 0; separator[j]; j++)
+		{
