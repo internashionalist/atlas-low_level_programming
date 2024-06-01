@@ -25,6 +25,11 @@ unsigned int _strspn(char *s, char *accept)
 					break; /* stop counting */
 				}
 			}
+
+			if (accept[k] == '\0') /* once counter hits null byte */
+			{
+				return (count); /* return count */
+			}
 		}
 
 	return (count); /* number of bytes from accept found in s */
