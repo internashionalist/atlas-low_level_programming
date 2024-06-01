@@ -22,4 +22,17 @@ char *_strstr(char *haystack, char *needle)
 	{
 		for (k = 0; needle[k] != '\0'; k++) /* loop through needle */
 		{
+			if (haystack[i + k] != needle[k]) /* if nothing matches */
+			{
+				break; /* break loop */
+			}
+
+			if (needle[k] == '\0') /* once counter hits end of needle */
+			{
+				return (haystack + i); /* return beginning position */
+			}
+		}
+	}
+
+	return (0); /* otherwise return NULL */
 }
