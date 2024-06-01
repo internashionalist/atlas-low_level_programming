@@ -11,13 +11,13 @@
 
 char *_memset(char *s, char b, unsigned int n)
 {
-	unsigned int i;
+	unsigned int i; /* counter */
 
-	for (i = 0; i < n; i++)
+	for (i = 0; i < n; i++) /* loops through until n */
 	{
-		*(s + i) = b;
+		*(s + i) = b; /* sets count char pointed to by s to char b */
 	}
 
-	return (s);
+	return (s); /* returns pointer to mem area */
 
 }
