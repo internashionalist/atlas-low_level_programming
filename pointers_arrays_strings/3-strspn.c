@@ -11,8 +11,11 @@
 
 unsigned int _strspn(char *s, char *accept)
 {
-	unsigned int i;
-	unsigned int k;
+	unsigned int len; /* will be length where byte is found */
+	unsigned int k; /* accept counter */
 
-		for (i = 0; *(s + i) != '\0'; i++) /* loop through s */
+		for (len = 0; *(s + len) != '\0'; len++) /* loop through s */
+		{
+			for (k = 0; *(accept + k) != '\0'; k++) /* loop through accept */
+
 }
