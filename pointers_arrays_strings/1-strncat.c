@@ -11,23 +11,23 @@
 
 char *_strncat(char *dest, char *src, int n)
 {
-	int i;
-	int k;
+	int i; /* dest counter */
+	int k; /* src counter */
 
-	for (i = 0; *(dest + i) != '\0'; i++)
+	for (i = 0; *(dest + i) != '\0'; i++) /* iterate through string until null byte */
 	{
 		;
 	}
 
-	while (*(src + k) != '\0' && k < n)
+	while (*(src + k) != '\0' && k < n) /* iterate through src string until either n or null */
 	{
-		*(dest + i) = *(src + k);
+		*(dest + i) = *(src + k); /* copies src to end of dest */
 		i++;
 		k++;
 	}
 
-	*(dest +i) = '\0';
+	*(dest +i) = '\0'; /* stop copying at end of string */
 
-	return (dest);
+	return (dest); /* return concatenated result */
 }
 
