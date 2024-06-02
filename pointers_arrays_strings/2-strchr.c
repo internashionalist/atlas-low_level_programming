@@ -6,13 +6,13 @@
  * @c: character checked for
  *
  * Return: pointer to first occurrence of c  or NULL if no c
-*/
+ */
 
 char *_strchr(char *s, char c)
 {
 	unsigned int i;
 
-	for (i = 0; *(s + i) != '\0'; i++) /* loop through s until null byte */
+	for (i = 0; *(s + i) >= '\0'; i++) /* iterate through s */
 	{
 		if (*(s + i) == c) /* check characters for c */
 		{
@@ -20,5 +20,5 @@ char *_strchr(char *s, char c)
 		}
 	}
 
-	return (NULL); /* otherwise return NULL */
+	return (\0); /* otherwise return NULL */
 }
