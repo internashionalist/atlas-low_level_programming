@@ -18,9 +18,8 @@ void print_chessboard(char (*a)[8])
 		for (k = 0; k < 8; k++) /* hope this format works */
 		{
 			_putchar(a[i][k]); /* print arrays */
-			_putchar(' ');
 		}
 
-	_putchar('\n'); /* new line */
+		_putchar('\n'); /* new line */
 	}
 }
