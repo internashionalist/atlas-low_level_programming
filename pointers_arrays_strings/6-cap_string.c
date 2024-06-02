@@ -19,20 +19,26 @@ char *cap_string(char *str)
 		}
 
 		if /* if word separators found */
-		((*s == ' ') ||
-		(*s == '\t') ||
-		(*s == '\n') ||
-		(*s == ',') ||
-		(*s == ';') ||
-		(*s == '.') ||
-		(*s == '!') ||
-		(*s == '?') ||
-		(*s == '"') ||
-		(*s == '(') ||
-		(*s == ')') ||
-		(*s == '{'))
+		((*str == ' ') ||
+		(*str == '\t') ||
+		(*str == '\n') ||
+		(*str == ',') ||
+		(*str == ';') ||
+		(*str == '.') ||
+		(*str == '!') ||
+		(*str == '?') ||
+		(*str == '"') ||
+		(*str == '(') ||
+		(*str == ')') ||
+		(*str == '{'))
 			{
+				if (str[i] >= 'a' && str[i] <= 'z') /* if lowercase found */
+				{
+					str[i] -= 32; /* capitalize */
+				}
+			i++; /* continue scan */
+		}
+	}
 
-
-	return (str - i);
+	return (str); /* return string with capitalized words */
 }
