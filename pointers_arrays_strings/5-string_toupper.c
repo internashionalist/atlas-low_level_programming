@@ -9,17 +9,17 @@
 
 char *string_toupper(char *str)
 {
-	int i = 0;
+	int i; /* initialize string counter */
 
-	while (str[i] != '\0')
+	while (i = 0; *(str + i) != '\0') /* set to 0, iterate through str */
 	{
-		if (str[i] >= 97 && str[i] <= 122)
+		if (*(str + i) >= 97 && *(str + i) <= 122) /* find lowercase chars */
 		{
-			str[i] = str[i] - 32;
+			*(str + i) -= 32; /* convert to uppercase */
 		}
 
-		i++;
+		i++; /* increment through string */
 	}
 
-	return (str);
+	return (str); /* return uppercase string */
 }

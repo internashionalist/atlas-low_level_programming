@@ -5,22 +5,21 @@
 * @a: string to be reversed
 * @n: num of elements of the array
 *
-* Return: Always 0
+* Return: void
+* 
 */
 
 void reverse_array(int *a, int n)
 {
-	int *begin = a;
-	int *end = a + (n - 1);
+	int *begin = a; /* pointer to beginning of array */
+	int *end = a + (n - 1); /* pointer to end of array */
 
-	while (begin < end)
+	while (begin < end) /* while iterating through array */
 	{
-		int i = *begin;
-		*begin = *end;
-		*end = i;
+		int i = *begin; /* switches first and last */
+		*begin = *end; /* then second and second to last */
+		*end = i; /* all the way through until reversed */
 		begin++;
 		end--;
 	}
-}
-
-
+} /* return is void */
