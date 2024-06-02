@@ -9,13 +9,17 @@
 
 char *cap_string(char *str)
 {
-	int i; /* initialize iterator */
+	int i = 0; /* initialize iterator */
 
-	for (i = 0; str[i]; i++) /* iterate through string */
+	while (str[i]) /* loop through chars in string */
 	{
+		while (!(str[i] >= 'a' && str[i] <= 'z')) /* skip over lowercase letters */
+		{
+			i++; /* increment */
+		}
+
 		if /* if character BEFORE i is a separator */
-		(i == 0 ||
-		(str[i - 1] == ' ') ||
+		((str[i - 1] == ' ') ||
 		(str[i - 1] == '\t') ||
 		(str[i - 1] == '\n') ||
 		(str[i - 1] == ',') ||
@@ -26,8 +30,8 @@ char *cap_string(char *str)
 		(str[i - 1] == '"') ||
 		(str[i - 1] == '(') ||
 		(str[i - 1] == ')') ||
-		(str[i - 1] == '{')) &&
-		(str[i] >= 'a' && str[i] <= 'z') /* and i is lowercase */
+		(str[i - 1] == '{') ||
+		(i == 0)) /* or if first character in string */
 		{
 			str[i] -= 32; /* capitalize i char */
 		}
