@@ -9,36 +9,26 @@
 
 char *cap_string(char *str)
 {
-	int i = 0; /* initialize iterator to 0 */
+	int i; /* initialize iterator */
 
-	while (str[i]) /* array format */
+	for (int i = 0; str[i]; i++) /* iterate through string */
 	{
-		while (str[i] && !(str[i] >= 'a' && str[i] <= 'z')) /* skip lowercase chars */
-		{
-			i++; /* increment through str */
-		}
-
-		if /* if word separators found */
-		((*str == ' ') ||
-		(*str == '\t') ||
-		(*str == '\n') ||
-		(*str == ',') ||
-		(*str == ';') ||
-		(*str == '.') ||
-		(*str == '!') ||
-		(*str == '?') ||
-		(*str == '"') ||
-		(*str == '(') ||
-		(*str == ')') ||
-		(*str == '{'))
-			{
-				if (str[i] >= 'a' && str[i] <= 'z') /* if lowercase found */
-				{
-					str[i] -= 32; /* capitalize */
-				}
-			i++; /* continue scan */
+		if /* if character BEFORE i is a separator */
+		(i == 0 ||
+		 (str[i-1] == ' ' ||
+		  str[i-1] == '\t' ||
+		  str[i-1] == '\n' ||
+		  str[i-1] == ',' ||
+		  str[i-1] == ';' ||
+		  str[i-1] == '.' ||
+		  str[i-1] == '!' ||
+		  str[i-1] == '?' ||
+		  str[i-1] == '"' ||
+		  str[i-1] == '(' ||
+		  str[i-1] == ')' ||
+		  str[i-1] == '{')
+		 && (str[i] >= 'a' && str[i] <= 'z')) /* and i is lowercase */
 		}
 	}
 
-	return (str); /* return string with capitalized words */
-}
+	return (str); /* return string with capitalized chars */
