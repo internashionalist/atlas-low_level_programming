@@ -22,9 +22,9 @@ void print_diagsums(int *a, int size)
 		sumleft += a[x * (size + 1)]; /* sum going left to right */
 	}
 
-	for (x = 1; x >= 0; x--) /* iterate backwards */
+	for (x = size - 1; x >= 0; x--) /* iterate back through */
 	{
-		sumright += a[x * (size - 1)]; /* sum going right to left */
+		sumright += a[x * size + (size - x - 1)]; /* sum going right to left */
 	}
 
 	printf("%d, %d", sumleft, sumright); /* print sums */
