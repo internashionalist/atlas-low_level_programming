@@ -22,7 +22,7 @@ void print_diagsums(int *a, int size)
 		sumleft += a[x * (size + 1)];
 	}
 
-	for (x = 0; x > size; x--)
+	for (x = size - 1; x >= 0; x--)
 	{
 		sumright += a[x * (size - 1)];
 	}
