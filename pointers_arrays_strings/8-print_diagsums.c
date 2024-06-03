@@ -17,16 +17,16 @@ void print_diagsums(int *a, int size)
 	int sumright = 0; /* sum going right */
 	int x; /* iterator through a */
 
-	for (x = 0; x < size; x++)
+	for (x = 0; x < size; x++) /* iterate through matrix */
 	{
-		sumleft += a[x * (size + 1)];
+		sumleft += a[x * (size + 1)]; /* sum going left to right */
 	}
 
-	for (x = size - 1; x >= 0; x--)
+	for (x = 1; x >= 0; x--) /* iterate backwards */
 	{
-		sumright += a[x * (size - 1)];
+		sumright += a[x * (size - 1)]; /* sum going right to left */
 	}
 
-	printf("%d, %d", sumleft, sumright);
-	printf("\n");
+	printf("%d, %d", sumleft, sumright); /* print sums */
+	printf("\n"); /* print new line */
 }
