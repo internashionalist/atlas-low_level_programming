@@ -13,12 +13,19 @@
 
 void print_diagsums(int *a, int size)
 {
-	unsigned int sumleft = 0; /* sum going left */
-	unsigned int sumright = 0; /* sum going right */
-	unsigned int x; /* iterator through a */
+	int sumleft = 0; /* sum going left */
+	int sumright = 0; /* sum going right */
+	int x; /* iterator through a */
 
 	for (x = 0; x < size; x++)
 	{
-		sumleft += a[i * (size + 1)];
+		sumleft += a[x * (size + 1)];
 	}
 
+	for (x = 0; x > size; x--)
+	{
+		sumright += a[x * (size - 1)];
+	}
+
+	printf("%d, %d\n", sumleft, sumright);
+}
