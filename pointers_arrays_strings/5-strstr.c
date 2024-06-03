@@ -27,9 +27,9 @@ char *_strstr(char *haystack, char *needle)
 				break; /* break loop */
 			}
 
-			if (needle[k] == '\0') /* once counter hits end of needle */
+			if (needle[k + 1] == '\0') /* once counter hits end of needle */
 			{
-				return (haystack + i); /* return beginning position */
+				return &haystack[i]; /* return beginning position */
 			}
 		}
 	}
