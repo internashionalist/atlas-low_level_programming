@@ -11,7 +11,7 @@
 
 unsigned int _strspn(char *s, char *accept)
 {
-	unsigned int count; /* length of byte counter */
+	unsigned int count = 0; /* length of byte counter */
 	unsigned int i; /* byte counter */
 	unsigned int k; /* accept counter */
 
