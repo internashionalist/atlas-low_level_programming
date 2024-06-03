@@ -34,6 +34,8 @@ char *cap_string(char *str)
 		{
 			str[i] -= 32; /* capitalize i char */
 		}
+	i++;
+
 	}
 
 	return (str); /* return string with capitalized chars */
