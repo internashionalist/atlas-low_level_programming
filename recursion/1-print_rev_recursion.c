@@ -9,3 +9,9 @@
 
 void _print_rev_recursion(char *s)
 {
+	if (*s != '\0') /* BASE - stops at null byte */
+	{
+		_print_rev_recursion(s + 1); /* RECURSIVE CALL - move to next char through string */
+		_putchar(*s); /* print reversed string */
+	}
+}
