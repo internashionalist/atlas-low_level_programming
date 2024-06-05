@@ -9,13 +9,15 @@
 
 int factorial(int n)
 {
-	if (n < 0)
+	if (n < 0) /* BASE */
 	{
-		return (-1);
+		return (-1); /* error indication */
 	}
 
-	if (n == 0)
+	if (n == 0) /* BASE */
 	{
-		return (1);
+		return (1); /* factorial of 0 */
 	}
+
+	return (n * factorial(n - 1)); /* CALL - return factorial */
 }
