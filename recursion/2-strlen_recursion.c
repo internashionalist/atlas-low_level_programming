@@ -9,3 +9,12 @@
 
 int _strlen_recursion(char *s)
 {
+	if (*s == '\0') /* BASE - if null reached */
+	{
+		return (0); /* return 0 */
+	}
+	
+	else 
+	{
+	
+}
