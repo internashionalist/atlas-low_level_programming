@@ -10,3 +10,10 @@
 
 int _pow_recursion(int x, int y)
 {
+	if (y < 0) /* BASE - error */
+	{
+		return (-1); /* return error notification */
+	}
+
+	return (x * _pow_recursion(x, y - 1));
+}
