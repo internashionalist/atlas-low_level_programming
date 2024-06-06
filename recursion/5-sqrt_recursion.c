@@ -10,6 +10,10 @@
 
 int _sqfinder(int maybe, int perfect)
 {
+	if ((maybe * maybe) == perfect)
+	{
+		return (maybe);
+	}
 
 /**
  * _sqrt_recursion - finds an integers square root
