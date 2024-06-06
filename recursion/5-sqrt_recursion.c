@@ -1,10 +1,21 @@
 #include "main.h"
 
 /**
- * _sqrt_recursion - finds an integers natural square root
+ * _sqfinder - differentiates natural roots from approximates
+ * @maybe: maybe natural root, maybe not
+ * perfect: perfect square
+ *
+ * Return: maybe if natural square root, -1 if not
+ */
+
+int _sqfinder(int maybe, int perfect)
+{
+
+/**
+ * _sqrt_recursion - finds an integers square root
  * @n: given int
  *
- * Return: natural sqare root of integer
+ * Return: sqare root of integer
 */
 
 int _sqrt_recursion(int n)
