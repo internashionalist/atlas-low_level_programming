@@ -32,20 +32,5 @@ int _sqfinder(int maybe, int perfect)
 
 int _sqrt_recursion(int n)
 {
-	if (n < 0) /* if negative */
-	{
-		return (-1); /* no natural root */
-	}
-
-	if (n == 0) /* if 0 */
-	{
-		return (0); /* return 0 */
-	}
-
-	if (n == 1) /* if 1 */
-	{
-		return (1); /* wait why do I need this */
-	}
-
 	return (_sqfinder(n, 1));
 }
