@@ -47,5 +47,5 @@ int _sqrt_recursion(int n)
 		return (1); /* wait why do I need this */
 	}
 
-	return (n * _sqrt_recursion(n - 1));
+	return (_sqfinder(n));
 }
