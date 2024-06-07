@@ -11,6 +11,9 @@
 
 int primality(int x, int y)
 {
+	if (something that determines divisibility)
+
+	return (primality(x, y + 1)); /* CALL - increment potential divisor */
 }
 
 /**
