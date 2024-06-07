@@ -8,14 +8,14 @@
  * Return: maybe if natural square root, -1 if not
  */
 
-int _sqfinder(int maybe, int perfect)
+int _sqfinder(int perfect, int maybe)
 {
 	if ((maybe * maybe) == perfect) /* if approximate is NATURAL ROOT */
 	{
 		return (maybe); /* return that */
 	}
 
-	if ((maybe * maybe) > perfect) /* if NOT */
+	if (maybe * maybe > perfect) /* if NOT */
 	{
 		return (-1); /* return error */
 	}
@@ -32,5 +32,15 @@ int _sqfinder(int maybe, int perfect)
 
 int _sqrt_recursion(int n)
 {
-	return (_sqfinder(n, 1));
+	if (n < 0) /* if n is negative */
+	{
+		return (-1); /* return error */
+	}
+
+	if (n == 0) /* if n is 0 */
+	{
+		return (0); /* return 0 */
+	}
+
+	return (_sqfinder(n, 1)); /* CALL - use given int and start guessing at 1 */
 }
