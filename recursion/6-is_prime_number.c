@@ -12,10 +12,14 @@
 int primality(int x, int y)
 {
 	if (x % y == 0) /* if checked int is divisible */
+	{
 		return (0); /* ya girls not prime */
+	}
 
 	if (y >= x / 2) /* if divisor is >= checked int */
+	{
 		return (1); /* shes prime */
+	}
 
 	return (primality(x, y + 1)); /* CALL - increment potential divisor */
 }
@@ -40,9 +44,9 @@ int is_prime_number(int n)
 	}
 
 	if (n == 2) /* include 2 though */
-        {
-                return (1);
-        }
+	{
+		return (1);
+	}
 
 	return (primality(n, 3)); /* CALL - start at 3 */
 }
