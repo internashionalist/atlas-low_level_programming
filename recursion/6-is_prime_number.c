@@ -11,7 +11,11 @@
 
 int primality(int x, int y)
 {
-	if (something that determines divisibility)
+	if (x % y == 0) /* if checked int is divisible */
+		return (0); /* ya girls not prime */
+
+	if (y >= x / 2) /* if divisor is >= checked int */
+		return (1); /* shes prime */
 
 	return (primality(x, y + 1)); /* CALL - increment potential divisor */
 }
