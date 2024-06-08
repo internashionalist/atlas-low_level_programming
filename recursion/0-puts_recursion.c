@@ -15,9 +15,9 @@ void _puts_recursion(char *s)
 		return;
 	}
 
-        else /* else if char is NOT end of string */
-        {
-                _putchar(*s); /* print char */
-                _puts_recursion(s + 1); /* then continue recursively through string */
-        }
+	else /* else if char is NOT end of string */
+	{
+		_putchar(*s); /* print char */
+		_puts_recursion(s + 1); /* then continue recursively through string */
+	}
 }
