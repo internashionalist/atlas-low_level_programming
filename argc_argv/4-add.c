@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "main.h"
 
 /**
@@ -35,3 +36,12 @@ int main(int argc, char *argv[])
 					return (1);
 				}
 			}
+
+		sum += atoi(argv[a]);
+		}
+
+		printf("%d\n", sum);
+	}
+
+	return (0);
+}
