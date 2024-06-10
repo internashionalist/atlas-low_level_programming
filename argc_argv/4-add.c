@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	{
 		for (a = 1; a < argc; a++) /* got help, made args into iterators */
 		{
-			for (b = 0; argv[a][b] != '\0'; b++) 
+			for (b = 0; argv[a][b] != '\0'; b++)
 			{
 				if (argv[a][b] < '0' || argv[a][b] > '9') /* if neg or non-digit */
 				{
