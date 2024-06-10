@@ -22,9 +22,16 @@ int main(int argc, char *argv[])
 		return (0);
 	}
 
-	if (argv[a][b] < '0' || argv[a][b] > '9') /* if inputs are neg or non-digit */
+	else
 	{
-		printf("Error\n"); /* print Error + \n */
+		for (a = 1; a < argc; a++) /* got help, made args into iterators */
+		{
+			for (b = 0; argv[a][b] != '\0'; b++) 
+			{
+				if (argv[a][b] < '0' || argv[a][b] > '9') /* if neg or non-digit */
+				{
+					printf("Error\n");
 
-		return (1); /* and return 1 */
-	}
+					return (1);
+				}
+			}
