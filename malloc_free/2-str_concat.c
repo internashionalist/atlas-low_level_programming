@@ -10,7 +10,7 @@
 
 char *str_concat(char *s1, char *s2)
 {
-	int i = 0; /* iterator */
+	int i = 0; /* first iterator */
 	int j = 0; /* second iterator */
 	int s1size = 0; /* string 1 size counter */
 	int s2size = 0; /*string 2 size counter */
@@ -62,3 +62,4 @@ char *str_concat(char *s1, char *s2)
 
 	return (doublecat); /* please oh doublecat just compile */
 }
+
