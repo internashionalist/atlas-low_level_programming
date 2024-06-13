@@ -33,4 +33,10 @@ char *_strdup(char *str)
 		return (NULL);
 	}
 
+        for (i = 0; str[i] != '\0'; i++) /* iterate through string */
+        {
+                strcopy[i] = str[i]; /* copy through char by char */
+        }
+
+        return (strcopy); /* pointer to beginning of copied string */
 }
