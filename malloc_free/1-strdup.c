@@ -14,7 +14,7 @@ char *_strdup(char *str)
 {
 	unsigned int i = 0; /* iterator */
 	unsigned int length = 0; /* length counter */
-	char *strcopy /* copied string */
+	char *strcopy; /* copied string */
 
 	if (str == NULL) /* if string absent */
 	{
