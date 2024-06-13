@@ -1,6 +1,6 @@
 #ifndef main_h
 #define main_h
-#include <stdio.h>i
+#include <stdio.h>
 #include <stdlib.h>
 
 char *create_array(unsigned int, char);
