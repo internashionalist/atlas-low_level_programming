@@ -26,17 +26,17 @@ char *_strdup(char *str)
 		length++;
 	}
 
-	strcopy = malloc(sizeof(char) * (length + 1)); /* allocate size, include null */
+	strcopy = malloc(sizeof(char) * (length + 1)); /* allocate size, null */
 
 	if (strcopy == NULL) /* if failed */
 	{
 		return (NULL);
 	}
 
-        for (i = 0; str[i] != '\0'; i++) /* iterate through string */
-        {
-                strcopy[i] = str[i]; /* copy through char by char */
-        }
+	for (i = 0; str[i] != '\0'; i++) /* iterate through string */
+	{
+		strcopy[i] = str[i]; /* copy through char by char */
+	}
 
-        return (strcopy); /* pointer to beginning of copied string */
+	return (strcopy); /* pointer to beginning of copied string */
 }
