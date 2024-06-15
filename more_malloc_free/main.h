@@ -2,7 +2,7 @@
 #define main_h
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <string.h>
 
 void *malloc_checked(unsigned int);
 char *string_nconcat(char*, char*, unsigned int);
