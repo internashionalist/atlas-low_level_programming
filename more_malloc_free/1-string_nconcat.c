@@ -14,9 +14,12 @@
 
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	unsigned int s1len;
-	unsigned int s2len;
-	
+	unsigned int s1len; /* length of s1 */
+	unsigned int s2len; /* length of s2 */
+	unsigned int i; /* iterator for s1 */
+	unsigned int j; /* iterator for n of s2 */
+	char *catstr; /* catd result */
+
 	if (s1 == NULL) /* if NULL, treat as empty strings */
 	{
 		s1 = "";
@@ -41,12 +44,24 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	{
 		n = s2len;
 	}
-	
-	char *catstr = (char *)malloc(s1len + n + 1); /* allocate memory + null */
+
+	catstr = (char *)malloc(s1len + n + 1); /* allocate memory + null */
 
 	if (catstr == NULL) /* if it fails */
 	{
 		return (NULL);
 	}
 
+	for (i = 0; i < s1len; i++)
+	{
+		catstr[i] = s1[i]; /* copy s1 to catstr */
+	}
+
+	for (j = 0; j < n; j++) /* iterate until n */
+	{
+		catstr[i + j] = s2[j]; /* copy strings (n of s2) */
+	}
+
+	return (catstr); /* return pointer to catd strings */
+}
 
