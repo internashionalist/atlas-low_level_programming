@@ -44,10 +44,9 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	
 	char *catstr = (char *)malloc(s1len + n + 1); /* allocate memory + null */
 
-	if (result == NULL) /* if it fails */
+	if (catstr == NULL) /* if it fails */
 	{
 		return (NULL);
 	}
-
 
 
