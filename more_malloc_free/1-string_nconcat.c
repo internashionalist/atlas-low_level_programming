@@ -61,6 +61,8 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	{
 		catstr[i + j] = s2[j]; /* copy strings (n of s2) */
 	}
+	
+	catstr[i + j] = '\0';
 
 	return (catstr); /* return pointer to catd strings */
 }
