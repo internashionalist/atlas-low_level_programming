@@ -10,28 +10,28 @@
 
 int *array_range(int min, int max)
 {
-    int *array;
-    int i;
-    int size;
+	int *array;
+	int i;
+	int size;
 
-    if (min > max) /* if min > max */
-    {
-        return (NULL);
-    }
+	if (min > max) /* if min > max */
+	{
+		return (NULL);
+	}
 
-    size = (max - min) + 1; /* contain all integers */
+	size = (max - min) + 1; /* contain all integers */
 
-    array = malloc(sizeof(int) * size); /* allocate */
+	array = malloc(sizeof(int) * size); /* allocate */
 
-    if (array == NULL) /* if malloc fails */
-    {
-        return (NULL);
-    }
+	if (array == NULL) /* if malloc fails */
+	{
+		return (NULL);
+	}
 
-    for (i = 0; i < size; i++) /* iterate through */
-    {
-        array[i] = min++; /* increment */
-    }
+	for (i = 0; i < size; i++) /* iterate through */
+	{
+		array[i] = min++; /* increment */
+	}
 
-    return (array);
+	return (array);
 }
