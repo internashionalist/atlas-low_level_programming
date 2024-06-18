@@ -3,8 +3,11 @@
 
 /**
  * struct - dog
+ * @name: name of dog
+ * @age: age of said dog
+ * @owner: whos got the dog
  *
- * Return - no idea
+ * Return - void I guess
  */
 
 struct dog
