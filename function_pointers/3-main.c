@@ -26,12 +26,6 @@ int main(int argc, char *argv[])
 		exit(98); /* Error Code 98 */
 	}
 
-	if ((arg[3]) == NULL) /* last point */
-	{
-		printf("Error\n");
-                exit(98); /* Error Code 98 */
-        }
-
 	if (get_op_func(argv[2]) == NULL || argv[2][1] != '\0')
 	{
 		printf("Error\n");
