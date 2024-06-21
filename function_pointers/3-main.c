@@ -13,13 +13,12 @@ int main(int argc, char *argv[])
 {
 	int num1;
 	int num2;
-	int *operation (int, int);
+	int (*operation)(int, int);
 
 	num1 = atoi(argv[1]);
 	num2 = atoi(argv[3]);
-	operator = argv[2];
 
-	operation = get_op_func(operator)
+	operation = get_op_func(argv[2]);
 
 	if (argc != 4) /* if number of arguments wrong */
 	{
@@ -27,8 +26,15 @@ int main(int argc, char *argv[])
 		exit(98); /* Error Code 98 */
 	}
 
-	/* need Error Code 99 if statement */
+	if (get_op_func(argv[2]) == NULL || argv[2][1] != '\0')
+	{
+		printf("Error\n");
+		exit(99);
+	}
 
 	/* Error Code 100 addressed in get_op_func */
 
-	
+	printf("%d\n", operation(num1, num2));
+
+	return (0);
+}
