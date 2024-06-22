@@ -21,7 +21,7 @@ int (*get_op_func(char *s))(int, int)
 
 	int i = 0;
 
-	while (i < 10)
+	while (i < 6)
 	{
 		if (s[0] == ops->op[i]) /* iterate through until op found */
 		{
