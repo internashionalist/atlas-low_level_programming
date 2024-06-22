@@ -15,15 +15,15 @@ dog_t *new_dog(char *name, float age, char *owner)
 
 {
 	dog_t *new_dog;
-	int i = 0;
-	int j = 0;
-	int k = 0;
+	int i;
+	int j;
+	int k;
 
-	for (; name[i] != '\0'; i++) /* find name strlen */
+	for (i = 0; name[i] != '\0'; i++) /* find name strlen */
 		;
 	i++;
 
-	for (; owner[j] != '\0'; j++) /* find owner strlen */
+	for (j = 0; owner[j] != '\0'; j++) /* find owner strlen */
 		;
 	j++;
 
@@ -44,10 +44,10 @@ dog_t *new_dog(char *name, float age, char *owner)
 		return (NULL);
 	}
 
-	for (; k < i; k++) /* copy name and owner to new dog */
+	for (k = 0; k < i; k++) /* copy name and owner to new dog */
 		new_dog->name[k] = name[k];
 
-	for (; k < j; k++)
+	for (k = 0; k < j; k++)
 		new_dog->owner[k] = owner[k];
 
 	new_dog->age = age; /* set age */
