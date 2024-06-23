@@ -14,7 +14,6 @@ void print_all(const char * const format, ...)
 	char *separator;
 
 	va_start(args, format); /* init list, format first */
-
 	i = 0;
 	separator = ""; /* for now, no separator */
 	while (format && format[i])
@@ -40,8 +39,9 @@ void print_all(const char * const format, ...)
 					string = "(nil)";
 				printf("%s%s", separator, string);
 				break;
-			i++;
-			continue;
+			default:
+				i++;
+				continue;
 		}
 		separator = ", ";
 		i++;
