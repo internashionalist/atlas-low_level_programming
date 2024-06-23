@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
 	operation = get_op_func(argv[2]);
 
-	if (argc < 4 || argc > 4) /* if number of arguments wrong */
+	if (argc != 4 || argv[3] = NULL) /* if number of arguments wrong */
 	{
 		printf("Error\n");
 		exit(98); /* Error Code 98 */
