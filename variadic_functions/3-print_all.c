@@ -8,3 +8,16 @@
 
 void print_all(const char * const format, ...)
 {
+	va_list args;
+	unsigned int i;
+	char *string;
+	char *separator;
+
+	va_start(args, format); /* init list, format first */
+
+	i = 0;
+	
+	separator = ""; /* for now, no separator */
+
+	while (format && format[i]) 
+	{
