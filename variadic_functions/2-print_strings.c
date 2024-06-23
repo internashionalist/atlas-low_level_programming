@@ -34,11 +34,11 @@ void print_strings(const char *separator, const unsigned int n, ...)
 		{
 			printf("%s", strings);
 		}
-		
+
 		if (i < n - 1 && separator != NULL) /* if not last */
-                {
-                        printf("%s", separator); /* print sep */
-                }
+		{
+			printf("%s", separator); /* print sep */
+		}
 	}
 
 	va_end(args);
