@@ -20,6 +20,7 @@ size_t print_list(const list_t *h)
 		}
 
 		else
+<<<<<<< HEAD
 		{
 			printf("[%d] %s\n", h->len, h->str);
 		}
@@ -28,3 +29,13 @@ size_t print_list(const list_t *h)
 	}
 	return (node_count);
 }
+=======
+        {
+			printf("[%d] %s\n", h->len, h->str);
+		}
+    node_count++;
+    h = h->next;
+	}
+    return (node_count);
+}	
+>>>>>>> 43eaddb05077d5db5e0b1940546305e70d1b8382
