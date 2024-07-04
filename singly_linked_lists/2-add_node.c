@@ -18,5 +18,11 @@ list_t *add_node(list_t **head, const char *str)
 	string_copy = strdup(str); /* copy string */
 	len = 0; /* initialize counter */
 
-	if (string_copy != NULL) /* check if string copy is successful */
+	if (new_node == NULL) /* check for malloc failure */
+	{
+		return (NULL);
+	}
+
+	
+
 	
