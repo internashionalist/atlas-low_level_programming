@@ -15,4 +15,11 @@ list_t *add_node_end(list_t **head, const char *str)
 	unsigned int len; /* length counter */
 	char *string_copy; /* duplicate of string */
 
+	new_node = malloc(sizeof(list_t)); /* allocate memory for new node */
+
+	if (new_node == NULL) /* check for malloc failure */
+	{
+		return (NULL);
+	}
+
 	
