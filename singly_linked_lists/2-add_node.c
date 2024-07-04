@@ -10,3 +10,6 @@
 
 list_t *add_node(list_t **head, const char *str)
 {
+	list_t *new_node; /* create new node */
+	unsigned int len; /* length of string */
+	char *string_copy; /* copy of string */
