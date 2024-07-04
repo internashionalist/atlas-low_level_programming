@@ -30,4 +30,9 @@ list_t *add_node_end(list_t **head, const char *str)
 		len++; /* increment counter */
 	}
 
-	
+	new_node->str = string_copy; /* set string of new node */
+	new_node->len = len; /* set length of new node */
+	new_node->next = NULL; /* set new nodes next to NULL */
+
+	return (new_node); /* return address of new node */
+}
