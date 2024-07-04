@@ -11,5 +11,12 @@
 list_t *add_node(list_t **head, const char *str)
 {
 	list_t *new_node; /* create new node */
-	unsigned int len; /* length of string */
-	char *string_copy; /* copy of string */
+	unsigned int len; /* length counter */
+	char *string_copy; /* duplicate of string */
+
+	new_node = malloc(sizeof(list_t)); /* allocate memory for new node */
+	string_copy = strdup(str); /* copy string */
+	len = 0; /* initialize counter */
+
+	if (string_copy != NULL) /* check if string copy is successful */
+	
