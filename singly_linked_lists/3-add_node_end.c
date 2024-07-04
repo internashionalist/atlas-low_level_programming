@@ -11,7 +11,6 @@
 list_t *add_node_end(list_t **head, const char *str)
 {
 	list_t *new_node; /* create new node */
-	list_t *last_node; /* create last node */
 	unsigned int len; /* length counter */
 	char *string_copy; /* duplicate of string */
 
@@ -34,5 +33,11 @@ list_t *add_node_end(list_t **head, const char *str)
 	new_node->len = len; /* set length of new node */
 	new_node->next = NULL; /* set new nodes next to NULL */
 
-	return (new_node); /* return address of new node */
+	if (*head == NULL) /* check if list is empty */
+	{
+		*head = new_node; /* set head to new node */
+		return (*head); /* return address of new node */
+	}
+
+	return (*head); /* return address of head node */
 }
