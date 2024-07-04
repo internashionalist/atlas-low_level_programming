@@ -9,3 +9,12 @@
 
 size_t list_len(const list_t *h)
 {
+	int node_count = 0; /* counter */
+
+	while (h != NULL) /* iterate through list */
+	{
+		node_count++; /* increment counter */
+		h = h->next; /* move to next node */
+	}
+	return (node_count); /* return number of nodes */
+}
