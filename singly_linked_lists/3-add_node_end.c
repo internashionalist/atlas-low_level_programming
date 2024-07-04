@@ -19,7 +19,15 @@ list_t *add_node_end(list_t **head, const char *str)
 
 	if (new_node == NULL) /* check for malloc failure */
 	{
-		return (NULL);
+		return (NULL); /* return NULL on failure */
+	}
+
+	string_copy = strdup(str); /* copy string */
+	len = 0; /* initialize counter */
+
+	while (str[len] != '\0') /* iterate through string */
+	{
+		len++; /* increment counter */
 	}
 
 	
