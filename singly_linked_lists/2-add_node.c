@@ -28,6 +28,13 @@ list_t *add_node(list_t **head, const char *str)
 		len++; /* increment counter */
 	}
 
+	new_node->str = string_copy; /* set string of new node */
+	new_node->len = len; /* set length of new node */
+	new_node->next = *head; /* set new nodes next to head */
+	(*head) = new_node; /* set head to new node */
+
+	return (*head); /* return address of new head node */
+}
 	
 
 
