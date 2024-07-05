@@ -10,8 +10,13 @@
 int sum_listint(listint_t *head)
 {
 	int sum = 0; /* sum of all data */
+	listint_t *temp_node; /* temporary node */
 
 	if (head == NULL) /* if list is empty */
 	{
 		return (0); /* return 0 */
 	}
+
+	temp_node = head; /* set temp_node to head */
+
+}
