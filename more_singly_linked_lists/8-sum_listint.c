@@ -10,3 +10,8 @@
 int sum_listint(listint_t *head)
 {
 	int sum = 0; /* sum of all data */
+
+	if (head == NULL) /* if list is empty */
+	{
+		return (0); /* return 0 */
+	}
