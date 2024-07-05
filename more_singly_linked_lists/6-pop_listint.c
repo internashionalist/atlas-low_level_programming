@@ -9,4 +9,10 @@
 
 int pop_listint(listint_t **head)
 {
-	listint_t *temp = NULL;
+	listint_t *temp_node = NULL; /* temporary node */
+
+	if (*head == NULL) /* check if list is empty */
+	{
+		return (0); /* return 0 if empty */
+	}
+
