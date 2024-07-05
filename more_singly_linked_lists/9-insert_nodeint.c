@@ -39,3 +39,13 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	current_node = *head; /* set current_node to head */
 
 	while (index_counter < idx - 1) /* iterate through list until index */
+	{
+		current_node = current_node->next; /* move to next node */
+		index_counter++; /* increment index_counter */
+	}
+
+	new_node->next = current_node->next; /* set next of new_node to current_node's next */
+	current_node->next = new_node; /* set next of current_node to new_node */
+
+	return (new_node); /* return address of new node */
+}
