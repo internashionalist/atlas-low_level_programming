@@ -31,13 +31,13 @@ int create_file(const char *filename, char *text_content)
 		close(descriptor); /* close file */
 		return (1); /* return 1 */
 	}
-
-	while (text_content[content_length] != '\0') /* find length of text_content */
+	/* find length of text_content */
+	while (text_content[content_length] != '\0')
 	{
 		content_length++; /* increment counter */
 	}
-
-	num_write = write(descriptor, text_content, content_length); /* write to file */
+	/* write to file */
+	num_write = write(descriptor, text_content, content_length);
 
 	if (num_write == -1) /* if writing fails */
 	{
