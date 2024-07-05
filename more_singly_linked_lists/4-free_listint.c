@@ -3,7 +3,7 @@
 /**
  * free_listint - frees a linked listint_t list
  * @head: listint_t list to be freed
- * 
+ *
  * Return: void
  */
 
