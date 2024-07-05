@@ -22,5 +22,17 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 	descriptor = open(filename, O_RDONLY);
 
+	if (descriptor == -1) /* if open fails */
+	{
+		return (0); /* return 0 */
+	}
+
+	buffer = malloc(letters * sizeof(char)); /* malloc for buffer */
+
+	if (buffer == NULL) /* if malloc fails */
+	{
+		return (0); /* return 0 - could I combine these errors?? */
+	}
+
 	
 
