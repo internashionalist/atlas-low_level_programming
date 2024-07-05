@@ -13,4 +13,6 @@ void print_binary(unsigned long int n)
 	{
 		print_binary(n >> 1); /* shift n to the right */
 	}
-	
+
+	_putchar((n & 1) + '0'); /* print n and add '0' */
+}
