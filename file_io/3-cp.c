@@ -18,3 +18,10 @@ int copy_file(const char *file_from, const char *file_to)
 	{
 		return (-1); /* return -1 */
 	}
+
+	descriptor_from = open(file_from, O_RDONLY); /* open file_from - RDONLY??? */
+
+	if (descriptor_from == -1) /* if open fails */
+	{
+		return (-1); /* return -1 */
+	}
