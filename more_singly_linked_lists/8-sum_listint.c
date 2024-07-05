@@ -19,4 +19,11 @@ int sum_listint(listint_t *head)
 
 	temp_node = head; /* set temp_node to head */
 
+	while (temp_node != NULL) /* iterate through list */
+	{
+		sum += temp_node->n; /* add each node's data to sum */
+		temp_node = temp_node->next; /* move to next node */
+	}
+
+	return (sum); /* return sum of all data */
 }
