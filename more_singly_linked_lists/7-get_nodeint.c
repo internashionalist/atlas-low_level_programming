@@ -13,3 +13,11 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 {
 	unsigned int i; /* index counter */
 	listint_t *current_node; /* current node */
+
+	if (head == NULL) /* check if head is NULL */
+	{
+		return (NULL); /* return NULL */
+	}
+
+	current_node = head; /* set current_node to head */
+
