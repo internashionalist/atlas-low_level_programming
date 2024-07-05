@@ -21,3 +21,16 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 
 	current_node = head; /* set current_node to head */
 
+	for (i = 0; i < index; i++) /* iterate through list */
+	{
+		if (current_node == NULL) /* check if current_node is NULL */
+		{
+			return (NULL); /* return NULL */
+		}
+
+		current_node = current_node->next; /* move to next node */
+	}
+
+	return (current_node); /* return current_node */
+}
+
