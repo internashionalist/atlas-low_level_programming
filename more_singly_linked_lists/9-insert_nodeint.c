@@ -14,3 +14,10 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	unsigned int index_counter; /* index counter */
 	listint_t *new_node; /* new node */
 	listint_t *current_node; /* current node */
+
+	if (head == NULL) /* if list is empty */
+	{
+		return (NULL); /* return NULL */
+	}
+
+	
