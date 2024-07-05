@@ -13,10 +13,14 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	int descriptor; /* file descriptor */
 	ssize_t num_read; /* number of chars read */
 	ssize_t num_write; /* number of chars written */
+	char *buffer; /* character buffer I guess */
 
 	if (filename == NULL) /* if filename NULL */
 	{
 		return (0); /* return 0 */
 	}
 
-	descriptor = open(filename, ORDONLY);
+	descriptor = open(filename, O_RDONLY);
+
+	
+
