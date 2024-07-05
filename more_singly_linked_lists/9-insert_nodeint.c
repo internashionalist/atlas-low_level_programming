@@ -11,7 +11,7 @@
 
 listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 {
-	unsigned int index_counter; /* index counter */
+	unsigned int index_counter = 0; /* index counter */
 	listint_t *new_node; /* new node */
 	listint_t *current_node; /* current node */
 
@@ -27,6 +27,15 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 		return (NULL); /* return NULL on failure */
 	}
 
+	new_node->n = n; /* set value of new node */
 
+	if (idx == 0) /* if new node is to be added at beginning */
+	{
+		new_node->next = *head; /* set next of new node to head */
+		*head = new_node; /* set head to new node */
+		return (new_node); /* return address of new node */
+	}
 
-	
+	current_node = *head; /* set current_node to head */
+
+	while (index_counter < idx - 1) /* iterate through list until index */
