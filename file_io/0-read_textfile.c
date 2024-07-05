@@ -10,3 +10,6 @@
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
+	int descriptor; /* file descriptor */
+	ssize_t num_read; /* number of chars read */
+	ssize_t num_write; /* number of chars written */
