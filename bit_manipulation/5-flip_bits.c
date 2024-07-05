@@ -14,7 +14,7 @@ unsigned int flip_bits(unsigned long int n, unsigned long int m)
 	unsigned int bit_count = 0;
 	unsigned int iterator = 0;
 
-	for (iterator = 0; iterator < (sizeof(n) * 8); iterator++) /* iterate through */
+	for (iterator = 0; iterator < (sizeof(n) * 8); iterator++) /* iterate */
 	{
 		if (((n >> iterator) & 1) != ((m >> iterator) & 1)) /* if different */
 		{
