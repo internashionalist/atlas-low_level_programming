@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * delete_nodeint_at_index- deletes node of linked listint_t list where specified
+ * delete_nodeint_at_index- deletes specified node of linked listint_t list
  * @head: head of linked listint_t list
  * @index: position of node to be deleted
  *
@@ -27,7 +27,7 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 	}
 
 	current_node = *head; /* set current_node to head */
-	while (index_counter < index - 1) /* iterate through list until specified */
+	while (index_counter < index - 1) /* iterate through list to specified */
 	{
 		if (current_node == NULL) /* if current_node NULL */
 		{
