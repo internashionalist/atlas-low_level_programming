@@ -9,15 +9,8 @@
 
 void print_binary(unsigned long int n)
 {
-	unsigned long int mask = 1;
-	int i = 0;
-
-	if (n == 0)
+	if (n > 1) /* if n is greater than 1 */
 	{
-		_putchar('0');
-		return;
+		print_binary(n >> 1); /* shift n to the right */
 	}
-
-
-
-
+	
