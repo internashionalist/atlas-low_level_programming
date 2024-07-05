@@ -28,4 +28,8 @@ listint_t *add_nodeint_end(listint_t **head, const int n)
 		return (new_node); /* return address of new node */
 	}
 
-	
+	while (last_node->next != NULL) /* iterate through list */
+	{
+		last_node = last_node->next; /* move to next node */
+	}
+
