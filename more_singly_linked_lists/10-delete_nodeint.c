@@ -18,3 +18,11 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 	{
 		return (-1); /* return -1 */
 	}
+
+	if (index == 0) /* if node being deleted is the head node */
+	{
+		temp_node = *head; /* set temp_node to head */
+		*head = (*head)->next; /* move head to next node */
+		free(temp_node); /* free temp_node */
+		return (1); /* return 1 on success*/
+	}
