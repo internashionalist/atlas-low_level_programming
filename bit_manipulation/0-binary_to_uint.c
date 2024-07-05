@@ -6,3 +6,10 @@
  */
 unsigned int binary_to_uint(const char *b)
 {
+	unsigned int uint = 0;
+
+	if (!b) /* if b is NULL */
+	{
+		return (0); /* return 0 */
+	}
+
