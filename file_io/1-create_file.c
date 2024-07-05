@@ -10,8 +10,9 @@
 
 int create_file(const char *filename, char *text_content)
 {
-	int descriptor;
-	int num_write;
+	int descriptor; /* file descriptor */
+	int num_write; /* number of chars written */
+	int content_length = 0; /* length of text_content */
 
 	if (filename == NULL) /* if filename NULL */
 	{
@@ -25,4 +26,8 @@ int create_file(const char *filename, char *text_content)
 		return (-1); /* return -1 */
 	}
 
-	
+	while (text_content[content_length] != '\0') /* find length of text_content */
+	{
+		content_length++; /* increment counter */
+	}
+
