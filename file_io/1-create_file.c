@@ -21,6 +21,17 @@ int create_file(const char *filename, char *text_content)
 	/* open file, create if it doesn't exist, write only, truncate */
 	descriptor = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0600);
 
+	if (descriptor == -1) /* if any part of that fails */
+	{
+		return (-1); /* return -1 */
+	}
+
+	if (text_content == NULL) /* if text_content is NULL */
+	{
+		close(descriptor); /* close file */
+		return (1); /* return 1 */
+	}
+
 	while (text_content[content_length] != '\0') /* find length of text_content */
 	{
 		content_length++; /* increment counter */
