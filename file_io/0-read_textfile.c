@@ -13,9 +13,9 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	int descriptor; /* file descriptor */
 	ssize_t num_read; /* number of chars read */
 	ssize_t num_write; /* number of chars written */
-	char *buffer; /* character buffer I guess */
+	char *buffer = malloc(sizeof(char) * letters); /* more concise! */
 
-	if (filename == NULL) /* if filename NULL */
+	if (filename == NULL || buffer == NULL) /* if filename or buffer is NULL */
 	{
 		return (0); /* return 0 */
 	}
@@ -27,12 +27,6 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0); /* return 0 */
 	}
 
-	buffer = malloc(letters * sizeof(char)); /* malloc for buffer */
-
-	if (buffer == NULL) /* if malloc fails */
-	{
-		return (0); /* return 0 - could I combine these errors?? */
-	}
-
+	
 	
 
