@@ -13,3 +13,8 @@ int copy_file(const char *file_from, const char *file_to)
 	int descriptor_from, descriptor_to; /* file descriptors */
 	int num_read, num_write; /* number of characters read and written */
 	char buffer[1024]; /* buffer to hold characters */
+
+	if (file_from == NULL || file_to == NULL) /* if either file NULL */
+	{
+		return (-1); /* return -1 */
+	}
