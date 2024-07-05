@@ -18,3 +18,10 @@ listint_t *add_nodeint(listint_t **head, const int n)
 	{
 		return (NULL); /* return NULL on failure */
 	}
+
+	new_node->n = n; /* set value of new node */
+	new_node->next = *head; /* set next of new node to head */
+	*head = new_node; /* set head to new node */
+
+	return (new_node); /* return address of new node */
+}
