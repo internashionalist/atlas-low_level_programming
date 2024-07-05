@@ -11,3 +11,8 @@
 
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
+	unsigned int bit_count = 0;
+	unsigned int iterator = 0;
+
+	while (iterator < (sizeof(n) * 8)) /* while less than 64 bits */
+	{
