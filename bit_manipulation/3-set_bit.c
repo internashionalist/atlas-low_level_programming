@@ -10,9 +10,12 @@
 
 int set_bit(unsigned long int *n, unsigned int index)
 {
-	if (index > sizeof(unsigned long int) * 8) /* if index greater than 64 */
+	if (index > sizeof(n) * 8) /* if index greater than 64 */
 	{
 		return (-1); /* return -1 */
 	}
 
-	
+	*n = *n | (1 << index); /* set bit to '1' at index */
+
+	return (1); /* return 1 */
+}
