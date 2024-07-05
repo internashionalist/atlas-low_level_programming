@@ -33,3 +33,8 @@ listint_t *add_nodeint_end(listint_t **head, const int n)
 		last_node = last_node->next; /* move to next node */
 	}
 
+	last_node->next = new_node; /* set next of last node to new node */
+
+	return (new_node); /* return address of new node */
+}
+
