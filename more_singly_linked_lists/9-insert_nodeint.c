@@ -40,6 +40,12 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 
 	while (index_counter < idx - 1) /* iterate through list until index */
 	{
+		if (current_node == NULL) /* if current_node is NULL */
+		{
+			free(new_node); /* free new_node */
+			return (NULL); /* return NULL */
+		}
+
 		current_node = current_node->next; /* move to next node */
 		index_counter++; /* increment index_counter */
 	}
