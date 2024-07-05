@@ -36,8 +36,8 @@ int append_text_to_file(const char *filename, char *text_content)
 	{
 		content_length++; /* increment counter */
 	}
-
-	num_write = write(descriptor, text_content, content_length); /* write to file */
+	/* write to file */
+	num_write = write(descriptor, text_content, content_length);
 
 	if (num_write == -1) /* if writing fails */
 	{
