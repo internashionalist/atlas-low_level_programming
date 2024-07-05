@@ -34,6 +34,21 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0); /* return 0 - can I combine this with the above? */
 	}
 
+	num_write = write(STDOUT_FILENO, buffer, num_read);
+
+	if (num_write == -1 || num_read != num_write) /* if writing fails */
+	{
+		return (0); /* return 0 */
+	}
+
+	close(descriptor); /* close file */
+	free(buffer); /* free buffer - do I need to free in above cases? */
+
+	return (num_write); /* return number of characters written */
+}
+
+
+
 	
 	
 
