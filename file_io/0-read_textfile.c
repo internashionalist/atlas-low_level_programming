@@ -24,6 +24,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 	if (descriptor == -1) /* if open fails */
 	{
+		free(buffer); /* free buffer */
 		return (0); /* return 0 */
 	}
 
@@ -31,6 +32,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 	if (num_read == -1) /* if reading fails */
 	{
+		free(buffer); /* free buffer */
 		return (0); /* return 0 - can I combine this with the above? */
 	}
 
@@ -38,6 +40,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 
 	if (num_write == -1 || num_read != num_write) /* if writing fails */
 	{
+		free(buffer); /* free buffer */
 		return (0); /* return 0 */
 	}
 
