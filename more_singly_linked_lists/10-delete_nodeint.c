@@ -18,7 +18,6 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 	{
 		return (-1); /* return -1 */
 	}
-
 	if (index == 0) /* if node being deleted is the head node */
 	{
 		temp_node = *head; /* set temp_node to head */
@@ -28,7 +27,6 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 	}
 
 	current_node = *head; /* set current_node to head */
-
 	while (index_counter < index - 1) /* iterate through list until specified */
 	{
 		if (current_node == NULL) /* if current_node NULL */
@@ -38,7 +36,6 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 		current_node = current_node->next; /* move to next node */
 		index_counter++; /* increment index_counter */
 	}
-
 	temp_node = current_node->next; /* set temp_node to next node */
 	current_node->next = temp_node->next; /* set next of current_node */
 	free(temp_node); /* free temp_node */
