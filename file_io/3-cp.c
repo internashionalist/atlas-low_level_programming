@@ -13,6 +13,7 @@ int copy_file(const char *file_from, const char *file_to)
 	int descriptor_from, descriptor_to; /* file descriptors */
 	int num_read, num_write; /* number of characters read and written */
 	char buffer[1024]; /* buffer to hold characters */
+	mode_t permissions = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
 
 	/* permissions for new file */
 
@@ -26,7 +27,7 @@ int copy_file(const char *file_from, const char *file_to)
 	}
 
 	/* open file_to, create if it doesn't exist, readwrite, truncate */
-	descriptor_to = open(file_to, O_CREAT | O_RDWR | O_TRUNC, 700);
+	descriptor_to = open(file_to, O_CREAT | O_RDWR | O_TRUNC, permissions);
 
 	if (descriptor_to == -1) /* if open fails */
 	{
