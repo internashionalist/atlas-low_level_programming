@@ -13,8 +13,8 @@ int create_file(const char *filename, char *text_content)
 	int descriptor; /* file descriptor */
 	int num_write; /* number of chars written */
 	int content_length = 0; /* length of text_content */
-	mode_t permissions = S_IRUSR | S_IWUSR; /* permissions for new file */
-
+	mode_t permissions = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH;
+	/* permissions for new file */
 	if (filename == NULL) /* if filename NULL */
 	{
 		return (-1); /* return -1 */
