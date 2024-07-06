@@ -19,7 +19,7 @@ int append_text_to_file(const char *filename, char *text_content)
 		return (-1); /* return -1 */
 	}
 	/* open file, DO NOT CREATE, readwrite, append */
-	descriptor = open(filename, O_RDWR | O_APPEND);
+	descriptor = open(filename, O_RDWR | O_APPEND, 0664);
 
 	if (descriptor == -1) /* if any part of open fails */
 	{
