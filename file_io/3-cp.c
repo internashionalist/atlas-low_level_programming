@@ -25,8 +25,8 @@ int copy_file(const char *file_from, const char *file_to)
 		exit(98); /* exit with code 98 */
 	}
 
-	/* open file_to, create if it doesn't exist, readwrite, truncate */
-	descriptor_to = open(file_to, O_CREAT | O_RDWR | O_TRUNC, permissions);
+	/* open file_to, create if it doesn't exist, truncate */
+	descriptor_to = open(file_to, O_CREAT | O_TRUNC, permissions);
 
 	if (descriptor_to == -1) /* if open fails */
 	{
