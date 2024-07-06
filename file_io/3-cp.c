@@ -83,3 +83,16 @@ int copy_file(const char *file_from, const char *file_to)
 
 int main (char *argv[], int argc)
 {
+	int status; /* whether or not copy_file worked I guess */
+
+	if (argc != 3) /* if arguments wrong */
+	{
+		/* another error message */
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97); /* exit with code 97 */
+	}
+
+	status = copy_file(argv[1], argv[2]); /* copy the damn file */
+
+	return (status); /* return the status */
+}
