@@ -26,17 +26,18 @@ int append_text_to_file(const char *filename, char *text_content)
 		return (-1); /* return -1 - failure */
 	}
 	/* find length of text_content */
-	while (text_content != NULL || text_content[content_length] != '\0')
+	while (text_content != NULL ||text_content[content_length] != '\0')
 	{
 		content_length++; /* increment counter */
-		/* write to file */
-		num_write = write(descriptor, text_content, content_length);
-
-		if (num_write == -1) /* if writing fails */
-		{
-			return (-1); /* return -1 - failure */
-		}
 	}
+	/* write to file */
+	num_write = write(descriptor, text_content, content_length);
+
+	if (num_write == -1) /* if writing fails */
+	{
+		return (-1); /* return -1 - failure */
+	}
+
 	close(descriptor); /* close file */
 	return (1); /* return 1 - success */
 }
