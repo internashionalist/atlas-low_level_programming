@@ -45,16 +45,6 @@ int copy_file(const char *file_from, const char *file_to)
 		exit(98); /* exit with code 98 */
 	}
 
-		/* read from file_from into buffer */
-		num_read = read(descriptor_from, buffer, 1024);
-
-	if (num_read == -1) /* if read fails */
-	{
-		/* error message for read failure */
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
-		exit(98); /* exit with code 98 */
-	}
-
 	/* write from buffer to file_to */
 	num_write = write(descriptor_to, buffer, num_read);
 
