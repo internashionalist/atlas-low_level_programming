@@ -19,7 +19,7 @@ int create_file(const char *filename, char *text_content)
 		return (-1); /* return -1 */
 	}
 	/* open file, create if it doesn't exist, readwrite, truncate */
-	descriptor = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0600);
+	descriptor = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0664);
 
 	if (descriptor == -1) /* if any part of that fails */
 	{
@@ -31,10 +31,14 @@ int create_file(const char *filename, char *text_content)
 		close(descriptor); /* close file */
 		return (1); /* return 1 */
 	}
-	/* find length of text_content */
-	while (text_content[content_length] != '\0')
+
+	if (text_content != NULL) /* if text_content is not NULL */
 	{
-		content_length++; /* increment counter */
+		/* find length of text_content */
+		while (text_content[content_length] != '\0')
+		{
+			content_length++; /* increment counter */
+		}
 	}
 	/* write to file */
 	num_write = write(descriptor, text_content, content_length);
