@@ -23,23 +23,31 @@ int create_file(const char *filename, char *text_content)
 	descriptor = open(filename, O_CREAT | O_RDWR | O_TRUNC, permissions);
 
 	if (descriptor == -1) /* if any part of that fails */
+	{
 		return (-1); /* return -1 */
+	}
 
 	if (text_content == NULL) /* if text_content is NULL */
+	{
 		close(descriptor); /* close file */
 		return (1); /* return 1 */
+	}
 
 	if (text_content != NULL) /* if text_content is not NULL */
 	{
-		/* find length of text_content */
-		while (text_content[content_length] != '\0')
+		while (text_content[content_length] != '\0') /* find length */
+		{
 			content_length++; /* increment counter */
+		}
 		/* write to file */
 		num_write = write(descriptor, text_content, content_length);
 
 		if (num_write == -1) /* if writing fails */
+		{
 			return (-1); /* return -1 */
+		}
 	}
+
 	close(descriptor); /* close file */
 	return (1); /* return 1 */
 }
