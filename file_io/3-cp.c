@@ -5,7 +5,7 @@
  * @file_from: file to copy from
  * @file_to: file to copy to
  *
- * Return: 1 on success
+ * Return: 1 on success, bunch of error messages and exit codes on failure
  */
 
 int copy_file(const char *file_from, const char *file_to)
@@ -72,3 +72,14 @@ int copy_file(const char *file_from, const char *file_to)
 
 	return (1); /* return 1 on success */
 }
+
+/**
+ * main - entry point to copy thsi stupid file
+ * @argc: number of arguments
+ * @argv: array of arguments
+ *
+ * Return: 1 on success, bunch of other stuff on failure
+ */
+
+int main (char *argv[], int argc)
+{
