@@ -81,7 +81,7 @@ int copy_file(const char *file_from, const char *file_to)
  * Return: 1 on success, bunch of other stuff on failure
  */
 
-int main (char *argv[], int argc)
+int main (int argc, char *argv[]) 
 {
 	int status; /* whether or not copy_file worked I guess */
 
