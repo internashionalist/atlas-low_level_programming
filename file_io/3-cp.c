@@ -46,16 +46,27 @@ int copy_file(const char *file_from, const char *file_to)
 		exit(98); /* exit with code 98 */
 	}
 
-	/* write from buffer to file_to */
-	num_write = write(descriptor_to, buffer, num_read);
-
-	if (num_write == -1) /* if write fails */
+	while (num_read > 0) /* while there are characters to read */
 	{
-		/* error message for write failure */
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
-		exit(99); /* exit with code 99 */
-	}
+		/* write from buffer to file_to */
+		num_write = write(descriptor_to, buffer, num_read);
 
+		if (num_write == -1) /* if write fails */
+		{
+			/* error message for write failure */
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
+			exit(99); /* exit with code 99 */
+		}
+		/* read from file_from into buffer */
+		num_read = read(descriptor_from, buffer, 1024);
+
+		if (num_read == -1) /* if read fails */
+		{
+			/* error message for read failure */
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
+			exit(98); /* exit with code 98 */
+		}
+	}
 	/* close file_from */
 	if (close(descriptor_from) == -1)
 	{
