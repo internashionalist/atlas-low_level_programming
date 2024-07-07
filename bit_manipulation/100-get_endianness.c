@@ -2,7 +2,7 @@
 
 /**
  * get_endianness - checks... <looks at notes> ..endianness?
- * 
+ *
  * Return: 0 if big, 1 if little
  */
 
