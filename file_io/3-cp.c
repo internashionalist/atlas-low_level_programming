@@ -41,12 +41,10 @@ int copy_file(const char *file_from, const char *file_to)
 
 	while (num_read > 0) /* while there are characters to read */
 	{
-		/* write from buffer to file_to */
 		num_write = write(descriptor_to, buffer, num_read);
-
+		/* write to file_to from buffer */
 		if (num_write == -1) /* if write fails */
 		{
-			/* error message for write failure */
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
 			exit(99); /* exit with code 99 */
 		}
@@ -55,7 +53,6 @@ int copy_file(const char *file_from, const char *file_to)
 
 		if (num_read == -1) /* if read fails */
 		{
-			/* error message for read failure */
 			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 			exit(98); /* exit with code 98 */
 		}
@@ -89,7 +86,6 @@ int main (int argc, char *argv[])
 
 	if (argc != 3) /* if arguments wrong */
 	{
-		/* another error message */
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97); /* exit with code 97 */
 	}
