@@ -24,6 +24,9 @@ size_t print_listint_safe(const listint_t *head)
 	while (hare) /* iterate through list */
 	{
 		if (tortoise == hare) /* if tortoise catches hare */
-		
-		
+		{	/* print tortoise */
+			printf("-> [%p] %d\n", (void *)tortoise, tortoise->n)
+			return (node_count); /* return number of nodes */
+		}
+	
 
