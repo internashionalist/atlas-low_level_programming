@@ -9,12 +9,16 @@
 
 size_t print_listint_safe(const listint_t *head)
 {
-	size_t node_count = 0; /* number of nodes */
-	const listint_t *current_node = head; /* current node */
+	listint_t *tortoise; /* slow pointer */
+	listint_t *hare; /* fast pointer */
+	size_t node_count = 1; /* counter */
 
-	while (current_node) /* iterate through list */
-	{	/* print node */
-		printf("[%p] %d\n", (void *)current_node, current_node->n);
-		node_count++; /* increment node_count */
+	if (head == NULL) /* check for NULL */
+	
+	{
+		exit(98); /* exit status 98 */
+	}
 
+	tortoise = (listint_t *)head; /* set tortoise to head */
+	hare = head->next; /* set hare to next node */
 
