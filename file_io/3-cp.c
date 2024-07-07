@@ -14,34 +14,27 @@ int copy_file(const char *file_from, const char *file_to)
 	int num_read, num_write; /* number of characters read and written */
 	char buffer[1024]; /* buffer to hold characters */
 	mode_t permissions = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
-
 	/* permissions for new file */
-
 	descriptor_from = open(file_from, O_RDONLY); /* open file_from, DO NOT CREATE */
 
 	if (descriptor_from == -1) /* if open fails */
 	{
-		/* error message for open failure */
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 		exit(98); /* exit with code 98 */
 	}
-
 	/* open file_to, create if it doesn't exist, readwrite, truncate */
 	descriptor_to = open(file_to, O_CREAT | O_RDWR | O_TRUNC, permissions);
 
 	if (descriptor_to == -1) /* if open fails */
 	{
-		/* error message for open failure */
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
 		exit(99); /* exit with code 99 */
 	}
-
 	/* read from file_from into buffer */
 	num_read = read(descriptor_from, buffer, 1024);
 
 	if (num_read == -1) /* if read fails */
 	{
-		/* error message for read failure */
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
 		exit(98); /* exit with code 98 */
 	}
@@ -67,18 +60,14 @@ int copy_file(const char *file_from, const char *file_to)
 			exit(98); /* exit with code 98 */
 		}
 	}
-	/* close file_from */
-	if (close(descriptor_from) == -1)
+	if (close(descriptor_from) == -1) /* close file_from */
 	{
-		/* error for close failure */
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", descriptor_from);
 		exit(100); /* exit with code 100 */
 	}
 
-	/* close file_to */
-	if (close(descriptor_to) == -1)
+	if (close(descriptor_to) == -1) /* close file_to */
 	{
-		/* error for close failure */
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", descriptor_to);
 		exit(100); /* exit with code 100 */
 	}
