@@ -31,10 +31,14 @@ int append_text_to_file(const char *filename, char *text_content)
 		close(descriptor); /* close file */
 		return (1); /* return 1 - success */
 	}
-	/* find length of text_content */
-	while (text_content[content_length] != '\0')
+
+	if (text_content) /* if text_content is not NULL */
 	{
-		content_length++; /* increment counter */
+		/* find length of text_content */
+		while (text_content[content_length] != '\0')
+		{
+			content_length++; /* increment counter */
+		}
 	}
 	/* write to file */
 	num_write = write(descriptor, text_content, content_length);
