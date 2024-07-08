@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 		exit(97); /* print error message and exit with code 97 */
 	}
 
-	file_from = open(argv[1], O_RDONLY, permissions); /* open file_from - read only */
+	file_from = open(argv[1], O_RDONLY); /* open file_from - read only */
 
 	if (file_from == -1) /* if open fails */
 	{
