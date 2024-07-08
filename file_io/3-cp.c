@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 {
 	int file_from, file_to, n_read, n_write;
 	char buffer[1024];
+	mode_t permissions = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
 
 	if (argc != 3) /* if number of arguments is incorrect */
 	{
@@ -19,7 +20,7 @@ int main(int argc, char *argv[])
 		exit(97); /* print error message and exit with code 97 */
 	}
 
-	file_from = open(argv[1], O_RDONLY); /* open file_from - read only */
+	file_from = open(argv[1], O_RDONLY, permissions); /* open file_from - read only */
 
 	if (file_from == -1) /* if open fails */
 	{
@@ -27,7 +28,7 @@ int main(int argc, char *argv[])
 		exit(98); /* print error message and exit with code 98 */
 	}
 	/* open file_to - create, write only, truncate */
-	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC);
+	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, permissions);
 
 	if (file_to == -1) /* if open fails */
 	{
