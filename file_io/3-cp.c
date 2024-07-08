@@ -15,20 +15,17 @@ int main(int argc, char *argv[])
 	mode_t permissions = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
 
 	if (argc != 3) /* if number of arguments is incorrect */
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-		exit(97); /* print error message and exit with code 97 */
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n"), exit(97);
 
 	file_from = open(argv[1], O_RDONLY); /* open file_from - read only */
 	if (file_from == -1) /* if open fails */
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98); /* print error message and exit with code 98 */
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]), exit(98);
 
-	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, permissions); /* open file_to */
+	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, permissions);
 	if (file_to == -1) /* if open fails */
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		exit(99); /* print error message and exit with code 99 */
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]), exit(99);
 
-	while ((n_read = read(file_from, buffer, 1024)) > 0) /* read file_from into buffer */
+	while ((n_read = read(file_from, buffer, 1024)) > 0) /* file_from to buffer */
 	{
 		n_write = write(file_to, buffer, n_read); /* write data to file_to */
 		if (n_write == -1) /* if write fails */
