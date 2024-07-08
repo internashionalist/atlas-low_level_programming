@@ -30,9 +30,7 @@ int main(int argc, char *argv[])
 		n_write = write(file_to, buffer, n_read); /* write data to file_to */
 		if (n_write == -1) /* if write fails */
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			close(file_from);
-			close(file_to);
-			exit(99); /* print error message and exit with code 99 */
+			close(file_from), close(file_to), exit(99);
 	}
 
 	if (n_read == -1) /* if read fails */
