@@ -53,3 +53,8 @@ int main(int argc, char *argv[])
 		exit(98); /* print error message and exit with code 98 */
 	}
 
+	close(file_from); /* close file_from */
+	close(file_to); /* close file_to */
+
+	return (0); /* return 0 on success */
+}
