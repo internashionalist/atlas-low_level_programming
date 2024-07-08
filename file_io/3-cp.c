@@ -12,3 +12,18 @@ int main(int argc, char *argv[])
 {
 	int file_from, file_to, n_read, n_write;
 	char buffer[1024];
+	int permissions = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
+
+	if (argc != 3) /* if number of arguments is incorrect */
+	{
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97); /* print error message and exit with code 97 */
+	}
+	/* open file_from - read only */
+	file_from = open(argv[1], O_RDONLY | O_CREAT, permissions);
+
+	if (file_from == -1) /* if open fails */
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98); /* print error message and exit with code 98 */
+	}
