@@ -43,6 +43,8 @@ int main(int argc, char *argv[])
 		if (n_write == -1) /* if write fails */
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+			close(file_from);
+			close(file_to);
 			exit(99); /* print error message and exit with code 99 */
 		}
 	}
@@ -50,11 +52,9 @@ int main(int argc, char *argv[])
 	if (n_read == -1) /* if read fails */
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		close(file_from);
+		close(file_to);
 		exit(98); /* print error message and exit with code 98 */
 	}
 
-	close(file_from); /* close file_from */
-	close(file_to); /* close file_to */
 
-	return (0); /* return 0 on success */
-}
