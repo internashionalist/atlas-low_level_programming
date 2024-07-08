@@ -21,12 +21,13 @@ int main(int argc, char *argv[])
 	}
 
 	file_from = open(argv[1], O_RDONLY); /* open file_from - read only */
+
 	if (file_from == -1) /* if open fails */
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
-	/* open file_to, create if it doesn't exist, readwrite, truncate */
+	/* open file_to, create if it doesn't exist, readwrite, truncate, permissions */
 	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, permissions);
 
 	if (file_to == -1) /* if open fails */
