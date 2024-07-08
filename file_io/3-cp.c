@@ -27,3 +27,15 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98); /* print error message and exit with code 98 */
 	}
+	/* open file_to - create, write only, truncate */
+	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, permissions);
+
+	if (file_to == -1) /* if open fails */
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99); /* print error message and exit with code 99 */
+	}
+
+	n_read = read(file_from, buffer, 1024); /* read file_from with buffer */
+
+	
