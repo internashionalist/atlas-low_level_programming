@@ -35,7 +35,21 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		exit(99); /* print error message and exit with code 99 */
 	}
+	/* read data in file_from into buffer */
+	while ((n_read = read(file_from, buffer, 1024)) > 0)
+	{
+		n_write = write(file_to, buffer, n_read); /* write data to file_to */
 
-	n_read = read(file_from, buffer, 1024); /* read file_from with buffer */
+		if (n_write == -1) /* if write fails */
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+			exit(99); /* print error message and exit with code 99 */
+		}
+	}
 
-	
+	if (n_read == -1) /* if read fails */
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98); /* print error message and exit with code 98 */
+	}
+
