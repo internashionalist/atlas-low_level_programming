@@ -11,7 +11,7 @@
 int create_file(const char *filename, char *text_content)
 {
 	int descriptor; /* file descriptor */
-	int num_write; /* number of chars written */
+	ssize_t num_write; /* number of chars written */
 	int content_length = 0; /* length of text_content */
 	mode_t permissions = S_IRUSR | S_IWUSR; /* permissions for new file */
 
@@ -25,12 +25,6 @@ int create_file(const char *filename, char *text_content)
 	if (descriptor == -1) /* if any part of that fails */
 	{
 		return (-1); /* return -1 */
-	}
-
-	if (text_content == NULL) /* if text_content is NULL */
-	{
-		close(descriptor); /* close file */
-		return (1); /* return 1 */
 	}
 
 	if (text_content != NULL) /* if text_content is not NULL */
