@@ -3,7 +3,7 @@
 /**
  * create_file - creates file
  * @filename: name of file being created
- * @text_content: content of file
+ * @text_content: content to be written in file
  *
  * Return: 1 on success, -1 on failure
  */
