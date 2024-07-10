@@ -9,4 +9,9 @@
 
 void free_dlistint(dlistint_t *head)
 {
-	dlistint_t *current_node; /* pointer for traversal */
+	dlistint_t *current_node = head; /* init pointer to head */
+	dlistint_t *next_node; /* init pointer to next node */
+
+	while (current_node != NULL) /* traverse list until NULL */
+	{
+		next_node = current_node->next; /* move to next node */
