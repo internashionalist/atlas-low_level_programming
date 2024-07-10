@@ -23,4 +23,8 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	if (!key || !*key || !ht || !value) /* if any parameter is NULL */
 		return (0); /* return 0 - failure */
 
+	new_node = malloc(sizeof(hash_node_t)); /* malloc for new_node */
+	if (new_node == NULL) /* if malloc fails */
+		return (0); /* return 0 - failure */
+
 	
