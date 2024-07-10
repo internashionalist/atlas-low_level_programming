@@ -24,7 +24,40 @@ dlistint_t *create_node(int n)
 	new_node->next = NULL; /* set next of new node */
 
 	return (new_node); /* return address of new node */
-} 
+}
+
+/**
+ * traverse_to_index - traverses to the node BEFORE the given index
+ * @h: pointer to head of the list
+ * @idx: index where new node to be inserted
+ * @index_finder: pointer to index counter
+ *
+ * Return: pointer to the node before the given index or NULL if failed
+ */
+
+dlistint_t *traverse_to_index(dlistint_t *h, unsigned int idx, unsigned int *index_finder)
+{
+	dlistint_t *current_node = h; /* make current node point to head */
+
+	while (current_node->next != NULL) /* traverse list until NULL */
+	{
+		current_node = current_node->next; /* move to next node */
+		(*index_finder)++; /* increment index counter */
+	}
+
+	if (idx > *index_finder) /* if index is out of range */
+	{
+		return (NULL); /* return NULL at failure */
+	}
+
+	while (*index_finder != idx) /* traverse to node before index */
+	{
+		current_node = current_node->prev; /* move to previous node */
+		(*index_finder)--; /* decrement index counter */
+	}
+
+	return (current_node); /* return pointer to node before index */
+}
 
 /**
    * insert_dnodeint_at_index - inserts new node at given index
@@ -51,20 +84,3 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 		return (add_dnodeint(h, n)); /* FUNCTION CALL FROM TASK 2 */
 	}
 
-	current_node = *h; /* make current node point to head */
-
-	while (current_node->next != NULL) /* traverse list until NULL */
-	{
-		current_node = current_node->next; /* move to next node */
-		index_finder++; /* increment index counter */
-	}
-
-	if (idx > index_finder) /* if index is out of range */
-	{
-		return (NULL); /* return NULL at failure */
-	}
-
-	if (idx == index_finder) /* if index is at tail */
-	{
-		return (add_dnodeint_end(h, n)); /* FUNCTION CALL FROM TASK 3 */
-	}
