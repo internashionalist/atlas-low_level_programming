@@ -14,47 +14,41 @@ int main(int argc, char *argv[])
 	char buffer[1024];
 	mode_t permissions = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
 
-	if (argc != 3) /* if number of arguments is incorrect */
+	if (argc != 3) /* if number of arguments is incorrect, exit 97 */
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n"), exit(97);
 
 	file_from = open(argv[1], O_RDONLY); /* open file_from - read only */
-	if (file_from == -1) /* if open fails */
+	if (file_from == -1) /* if open fails, exit 98 */
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
 	/* open file_to, create, readwrite, truncate, permissions */
 	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, permissions);
-	if (file_to == -1) /* if open fails */
-	{
+	if (file_to == -1) /* if open fails, exit 99 */
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]), exit(99);
-	}
 
 	while ((n_read = read(file_from, buffer, 1024)) > 0) /* read to buffer */
 	{
 		n_write = write(file_to, buffer, n_read); /* write to file_to */
-		if (n_write == -1) /* if write fails */
+		if (n_write == -1) /* if write fails, close and exit 99 */
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 			close(file_from), close(file_to), exit(99);
 		}
 	}
 
-	if (n_read == -1) /* if read fails */
+	if (n_read == -1) /* if read fails, close and exit 98 */
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		close(file_from), close(file_to), exit(98);
 	}
 
-	if (close(file_from) == -1) /* if file_from close fails */
-	{
+	if (close(file_from) == -1) /* if file_from close fails, exit 100 */
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_from), exit(100);
-	}
 
-	if (close(file_to) == -1) /* if file_to close fails */
-	{
+	if (close(file_to) == -1) /* if file_to close fails, exit 100 */
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_to), exit(100);
-	}
 
 	return (0); /* return 0 on success */
 }
