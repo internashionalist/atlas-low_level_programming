@@ -17,6 +17,16 @@ hash_table_t *hash_table_create(unsigned long int size)
 		return (NULL); /* return NULL - failure */
 
 	new_table->size = size; /* set size of new_table to.. uh.. size */
+
 	new_table->array = malloc(sizeof(hash_node_t *) * size); /* malloc for array ptrs */
 	if (new_table->array == NULL) /* if malloc fails */
 		return (NULL); /* return NULL - failure */
+
+	while (iterator < size) /* traverse array */
+	{
+		new_table->array[iterator] = NULL; /* set each ptr in array to NULL */
+		iterator++; /* increment iterator */
+	}
+
+	return (new_table); /* return shiny new hash table */
+}
