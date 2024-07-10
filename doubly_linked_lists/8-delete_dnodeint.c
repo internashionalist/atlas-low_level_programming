@@ -10,3 +10,14 @@
 
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
+	dlistint_t *current_node = *head; /* init pointer to current node */
+	unsigned int index_iterator = 0; /* init iterator, set to 0 */
+
+	if (*head == NULL) /* if list is empty */
+	{
+		return (-1); /* return -1 on failure */
+	}
+
+	
+
+	
