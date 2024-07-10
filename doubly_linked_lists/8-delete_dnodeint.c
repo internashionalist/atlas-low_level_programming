@@ -39,6 +39,7 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 	if (current_node->next != NULL) /* if not tail node */
 		current_node->next->prev = current_node->prev; /* seriously this took FOREVER */
 
+	free(current_node); /* erase index node from all memory.... */
 	return (1); /* SUCCESS */
 
 }
