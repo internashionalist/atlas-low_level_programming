@@ -31,11 +31,22 @@ dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
        {
               new_tail->prev = NULL; /* set prev of new tail to NULL */
               new_tail->next = NULL; /* set next of new tail to NULL */
-              *head = new_tail; /* set head to new tail */
+              *head = new_tail; /* set pointer to head to new tail */
        }
 
        else /* if list is not empty */
        {
               current_node = *head; /* set current node to head */
 
-         
+              while (current_node->next != NULL) /* traverse list until last node */
+              {
+                     current_node = current_node->next; /* move to next node */
+              }
+
+              current_node->next = new_tail; /* set next of current node to new tail */
+              new_tail->prev = current_node; /* set prev of new tail to current node */
+              new_tail->next = NULL; /* set next of new tail to NULL */
+       }
+
+       return (new_tail); /* return address of new tail */
+}
