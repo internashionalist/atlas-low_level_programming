@@ -73,29 +73,41 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	unsigned int index_finder = 0; /* index counter */
 
 	if (h == NULL) /* check if head is NULL */
+	{
 		return (NULL); /* return NULL at failure */
+	}
 
 	if (idx == 0) /* if index is at head */
+	{
 		return (add_dnodeint(h, n)); /* FUNCTION CALL FROM TASK 2 */
+	}
 	/* FUNCTION CALL TO TRAVERSE TO INDEX */
 	current_node = traverse_to_index(*h, idx, &index_finder);
 
 	if (current_node == NULL) /* if index is out of range */
+	{
 		return (NULL); /* return NULL at failure */
+	}
 
 	if (idx == index_finder) /* if index is at tail */
+	{
 		return (add_dnodeint_end(h, n)); /* FUNCTION CALL FROM TASK 3 */
+	}
 
 	new_node = create_node(n); /* FUNCTION CALL TO CREATE NEW NODE */
 
 	if (new_node == NULL) /* if malloc fails */
+	{
 		return (NULL); /* return NULL at failure */
+	}
 
 	new_node->next = current_node->next; /* set next of new node */
 	new_node->prev = current_node;	  /* set prev of new node */
 
 	if (current_node->next != NULL) /* if idx is not at tail */
+	{
 		current_node->next->prev = new_node; /* set prev of next node */
+	}
 
 	current_node->next = new_node; /* set next of current node */
 
