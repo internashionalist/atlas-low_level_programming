@@ -37,7 +37,6 @@ int main(int argc, char *argv[])
 			close(file_from), close(file_to), exit(99);
 		}
 	}
-
 	if (n_read == -1) /* if read fails, close and exit 98 */
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
