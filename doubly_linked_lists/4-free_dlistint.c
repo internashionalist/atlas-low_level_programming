@@ -15,3 +15,9 @@ void free_dlistint(dlistint_t *head)
 	while (current_node != NULL) /* traverse list until NULL */
 	{
 		next_node = current_node->next; /* move to next node */
+		free(current_node); /* free current node */
+		current_node = next_node; /* move to next nodes */
+	}
+
+	head = NULL; /* NULLify head - do I even need this? */
+}
