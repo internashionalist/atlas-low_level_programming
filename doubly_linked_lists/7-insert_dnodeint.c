@@ -70,7 +70,7 @@ dlistint_t *traverse_to_index(dlistint_t *h, unsigned int idx, unsigned int *ind
 
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	dlistint_t *new_node; /* pointer to new inserted node */
+	dlistint_t *new_node; /* pointer to new node */
 	dlistint_t *current_node; /* pointer to current node */
 	unsigned int index_finder = 0; /* index counter */
 	
@@ -82,5 +82,12 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	if (idx == 0) /* if index is at head */
 	{
 		return (add_dnodeint(h, n)); /* FUNCTION CALL FROM TASK 2 */
+	}
+	/* FUNCTION CALL TO TRAVERSE TO INDEX */
+	current_node = traverse_to_index(*h, idx, &index_finder);
+
+	if (current_node == NULL) /* if index is out of range */
+	{
+		return (NULL); /* return NULL at failure */
 	}
 
