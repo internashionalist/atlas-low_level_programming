@@ -13,7 +13,7 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
 	dlistint_t *new_node; /* pointer to new inserted node */
 	dlistint_t *current_node; /* pointer to current node */
-	unsigned int index_count = 0; /* index checker, set to 0 */
+	unsigned int index_finder = 0; /* index counter */
 	
 	if (h == NULL) /* check if head is NULL */
 	{
@@ -27,8 +27,19 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 
 	current_node = *h; /* make current node point to head */
 
-	while (current_node != NULL) /* traverse list to NULL */
+	while (current_node->next != NULL) /* traverse list until NULL */
 	{
-		if (index_count == idx - 1) /* if index is found, move back one */
-		{
-			
+		current_node = current_node->next; /* move to next node */
+		index_finder++; /* increment index counter */
+	}
+
+	if (idx > index_finder) /* if index is out of range */
+	{
+		return (NULL); /* return NULL at failure */
+	}
+
+	if (idx == index_finder) /* if index is at tail */
+	{
+		return (add_dnodeint_end(h, n)); /* FUNCTION CALL FROM TASK 3 */
+	}
+	
