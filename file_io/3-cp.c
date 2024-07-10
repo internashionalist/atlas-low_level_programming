@@ -21,24 +21,22 @@ int main(int argc, char *argv[])
 	}
 
 	file_from = open(argv[1], O_RDONLY); /* open file_from - read only */
-
 	if (file_from == -1) /* if open fails */
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
-	/* open file_to, create if it doesn't exist, readwrite, truncate, permissions */
+	/* open file_to, create, readwrite, truncate, permissions */
 	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, permissions);
-
 	if (file_to == -1) /* if open fails */
 	{
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		exit(99);
 	}
 
-	while ((n_read = read(file_from, buffer, 1024)) > 0) /* file_from to buffer */
+	while ((n_read = read(file_from, buffer, 1024)) > 0) /* read to buffer */
 	{
-		n_write = write(file_to, buffer, n_read); /* write data to file_to */
+		n_write = write(file_to, buffer, n_read); /* write to file_to */
 
 		if (n_write == -1) /* if write fails */
 		{
@@ -65,8 +63,7 @@ int main(int argc, char *argv[])
 
 	if (close(file_to) == -1) /* if file_to close fails */
 	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_to);
-		exit(100); /* print error message and exit with code 100 */
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_to), exit(100);
 	}
 
 	return (0); /* return 0 on success */
