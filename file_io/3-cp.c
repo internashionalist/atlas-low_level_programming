@@ -15,9 +15,7 @@ int main(int argc, char *argv[])
 	mode_t permissions = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
 
 	if (argc != 3) /* if number of arguments is incorrect */
-	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n"), exit(97);
-	}
 
 	file_from = open(argv[1], O_RDONLY); /* open file_from - read only */
 	if (file_from == -1) /* if open fails */
