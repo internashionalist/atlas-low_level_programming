@@ -10,3 +10,10 @@
 
 dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 {
+       dlistint_t *new_tail; /* pointer to new tail node */
+
+       new_tail = malloc(sizeof(dlistint_t)); /* malloc for new tail */
+       if (new_tail == NULL) /* if malloc fails */
+       {
+              return (NULL); /* return NULL */
+       }
