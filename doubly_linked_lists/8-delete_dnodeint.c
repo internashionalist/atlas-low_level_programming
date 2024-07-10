@@ -25,8 +25,8 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 		free(current_node); /* free memory of old head */
 		return (1); /* return 1 on success */
 	}
-
-	while (current_node != NULL && index_iterator < index) /* traverse to node before index */
+	/* traverse to node before index */
+	while (current_node != NULL && index_iterator < index)
 	{
 		current_node = current_node->next; /* move to next node */
 		index_iterator++; /* increment iterator */
@@ -37,7 +37,7 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 
 	current_node->prev->next = current_node->next; /* I can't stand these lines */
 	if (current_node->next != NULL) /* if not tail node */
-		current_node->next->prev = current_node->prev; /* seriously this took FOREVER */
+		current_node->next->prev = current_node->prev; /* This took FOREVER */
 
 	free(current_node); /* erase index node from all memory.... */
 	return (1); /* SUCCESS */
