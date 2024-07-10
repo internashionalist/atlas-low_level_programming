@@ -19,3 +19,8 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	hash_node_t *current_node = NULL; /* init traversal ptr, set to NULL */
 	unsigned long int index = 0; /* init index for hash table array, set to 0 */
 	char *duplicate = NULL; /* init ptr to duplicated value, set to NULL */
+
+	if (!key || !*key || !ht || !value) /* if any parameter is NULL */
+		return (0); /* return 0 - failure */
+
+	
