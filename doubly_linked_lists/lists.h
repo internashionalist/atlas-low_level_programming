@@ -36,5 +36,6 @@ dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index);
 int sum_dlistint(dlistint_t *head);
 size_t print_dlistint_backward(const dlistint_t *h);
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index);
+dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n);
 
 #endif
