@@ -15,3 +15,12 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	dlistint_t *current_node; /* pointer to current node */
 	unsigned int index_count = 0; /* index checker, set to 0 */
 	
+	if (h == NULL) /* check if head is NULL */
+	{
+		return (NULL); /* return NULL at failure */
+	}
+
+	if (idx == 0) /* if index is at head */
+	{
+		new_node->prev = NULL; /* set prev of new node to NULL */
+		
