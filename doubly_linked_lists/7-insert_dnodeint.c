@@ -91,3 +91,9 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 		return (NULL); /* return NULL at failure */
 	}
 
+	if (idx = index_finder) /* if index is at tail */
+	{
+		return (add_dnodeint_end(h, n)); /* FUNCTION CALL FROM TASK 3 */
+	}
+
+	
