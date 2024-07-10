@@ -24,3 +24,11 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	{
 		return (add_dnodeint(h, n)); /* FUNCTION CALL FROM TASK 2 */
 	}
+
+	current_node = *h; /* make current node point to head */
+
+	while (current_node != NULL) /* traverse list to NULL */
+	{
+		if (index_count == idx - 1) /* if index is found, move back one */
+		{
+			
