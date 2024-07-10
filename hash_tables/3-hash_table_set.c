@@ -23,8 +23,21 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	if (!key || !*key || !ht || !value) /* if any parameter is NULL */
 		return (0); /* return 0 - failure */
 
+	duplicate = strdup(value); /* duplicate value of key */
+	if (duplicate == NULL) /* if strdup fails */
+		return (0); /* return 0 - failure */
+
+	index = key_index(key, ht->size); /* get index of key in hash table array */
+
 	new_node = malloc(sizeof(hash_node_t)); /* malloc for new_node */
 	if (new_node == NULL) /* if malloc fails */
 		return (0); /* return 0 - failure */
+
+	new_node->key = strdup(key); /* set key of new_node to duplicated key */
+	if (new_node->key == NULL) /* if strdup fails */
+		return (0); /* return 0 - failure */
+
+	new_node->value = duplicate; /* set value of new_node to duplicated value */
+	new_node->next = NULL; /* set next of new_node to NULL */
 
 	
