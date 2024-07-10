@@ -15,8 +15,14 @@ dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index)
 
 	while (current_node != NULL) /* traverse list until NULL */
 	{
-		if (node_count == index) /* if index is found */
+		if (index_count == index) /* if index is found */
 		{
 			return (current_node); /* return address of that node */
 		}
 
+		current_node = current_node->next; /* move to next node */
+		index_count++; /* increment index counter */
+	}
+
+	return (NULL); /* return NULL if index not found */
+}
