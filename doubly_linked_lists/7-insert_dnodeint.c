@@ -22,5 +22,5 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 
 	if (idx == 0) /* if index is at head */
 	{
-		new_node->prev = NULL; /* set prev of new node to NULL */
-		
+		return (add_dnodeint(h, n)); /* FUNCTION CALL FROM TASK 2 */
+	}
