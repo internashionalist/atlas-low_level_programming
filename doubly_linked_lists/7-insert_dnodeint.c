@@ -35,26 +35,17 @@ dlistint_t *create_node(int n)
 
 dlistint_t *traverse_to_index(dlistint_t *h, unsigned int idx, unsigned int *index_finder)
 {
-	dlistint_t *current_node = h; /* make current node point to head */
+	dlistint_t *current_node = h; /* start from head */
 
-	while (current_node->next != NULL) /* traverse list until NULL */
+	*index_finder = 0; /* init index counter */
+	/* traverse to node before index */
+	while (current_node != NULL && *index_finder < idx - 1)
 	{
-		current_node = current_node->next; /* move to next node */
-		(*index_finder)++;			/* increment index counter */
+		current_node = current_node->next; /* Move to the next node */
+		(*index_finder)++;			/* Increment index counter */
 	}
 
-	if (idx > *index_finder) /* if index is out of range */
-	{
-		return (NULL); /* return NULL at failure */
-	}
-
-	while (*index_finder != idx) /* traverse to node before index */
-	{
-		current_node = current_node->prev; /* move to previous node */
-		(*index_finder)--;			/* decrement index counter */
-	}
-
-	return (current_node); /* return pointer to node before index */
+	return current_node; /* Return pointer to node before index */
 }
 
 /**
@@ -108,6 +99,7 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	{
 		current_node->next->prev = new_node; /* set prev of next node */
 	}
+
 
 	current_node->next = new_node; /* set next of current node */
 
