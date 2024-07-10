@@ -1,13 +1,39 @@
 #include "lists.h"
 
+#include "lists.h"
+
 /**
- * insert_dnodeint_at_index - inserts new node at given index
- * @h: pointer to pointer to head of list
- * @idx: index where new node to be inserted
+ * create_node - creates a new node with given value
  * @n: value to store in new node
  *
  * Return: address of new node or NULL if failed
  */
+dlistint_t *create_node(int n)
+{
+	dlistint_t *new_node;
+
+	new_node = malloc(sizeof(dlistint_t)); /* malloc for new node */
+
+	if (new_node == NULL) /* if malloc fails */
+	{
+		return (NULL); /* return NULL at failure */
+	}
+
+	new_node->n = n; /* set value of new node to n */
+	new_node->prev = NULL; /* set prev of new node */
+	new_node->next = NULL; /* set next of new node */
+
+	return (new_node); /* return address of new node */
+} 
+
+/**
+   * insert_dnodeint_at_index - inserts new node at given index
+   * @h: pointer to pointer to head of list
+   * @idx: index where new node to be inserted
+   * @n: value to store in new node
+   *
+   * Return: address of new node or NULL if failed
+   */
 
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
@@ -42,4 +68,3 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	{
 		return (add_dnodeint_end(h, n)); /* FUNCTION CALL FROM TASK 3 */
 	}
-	
