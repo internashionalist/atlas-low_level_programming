@@ -1,7 +1,5 @@
 #include "lists.h"
 
-#include "lists.h"
-
 /**
  * create_node - creates a new node with given value
  * @n: value to store in new node
@@ -19,7 +17,7 @@ dlistint_t *create_node(int n)
 		return (NULL); /* return NULL at failure */
 	}
 
-	new_node->n = n; /* set value of new node to n */
+	new_node->n = n;	  /* set value of new node to n */
 	new_node->prev = NULL; /* set prev of new node */
 	new_node->next = NULL; /* set next of new node */
 
@@ -42,7 +40,7 @@ dlistint_t *traverse_to_index(dlistint_t *h, unsigned int idx, unsigned int *ind
 	while (current_node->next != NULL) /* traverse list until NULL */
 	{
 		current_node = current_node->next; /* move to next node */
-		(*index_finder)++; /* increment index counter */
+		(*index_finder)++;			/* increment index counter */
 	}
 
 	if (idx > *index_finder) /* if index is out of range */
@@ -53,27 +51,27 @@ dlistint_t *traverse_to_index(dlistint_t *h, unsigned int idx, unsigned int *ind
 	while (*index_finder != idx) /* traverse to node before index */
 	{
 		current_node = current_node->prev; /* move to previous node */
-		(*index_finder)--; /* decrement index counter */
+		(*index_finder)--;			/* decrement index counter */
 	}
 
 	return (current_node); /* return pointer to node before index */
 }
 
 /**
-   * insert_dnodeint_at_index - inserts new node at given index
-   * @h: pointer to pointer to head of list
-   * @idx: index where new node to be inserted
-   * @n: value to store in new node
-   *
-   * Return: address of new node or NULL if failed
-   */
+ * insert_dnodeint_at_index - inserts new node at given index
+ * @h: pointer to pointer to head of list
+ * @idx: index where new node to be inserted
+ * @n: value to store in new node
+ *
+ * Return: address of new node or NULL if failed
+ */
 
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	dlistint_t *new_node; /* pointer to new node */
-	dlistint_t *current_node; /* pointer to current node */
+	dlistint_t *new_node;	   /* pointer to new node */
+	dlistint_t *current_node;	   /* pointer to current node */
 	unsigned int index_finder = 0; /* index counter */
-	
+
 	if (h == NULL) /* check if head is NULL */
 	{
 		return (NULL); /* return NULL at failure */
@@ -91,9 +89,27 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 		return (NULL); /* return NULL at failure */
 	}
 
-	if (idx = index_finder) /* if index is at tail */
+	if (idx == index_finder) /* if index is at tail */
 	{
 		return (add_dnodeint_end(h, n)); /* FUNCTION CALL FROM TASK 3 */
 	}
 
-	
+	new_node = create_node(n); /* FUNCTION CALL TO CREATE NEW NODE */
+
+	if (new_node == NULL) /* if malloc fails */
+	{
+		return (NULL); /* return NULL at failure */
+	}
+
+	new_node->next = current_node->next; /* set next of new node */
+	new_node->prev = current_node;	  /* set prev of new node */
+
+	if (current_node->next != NULL) /* if idx is not at tail */
+	{
+		current_node->next->prev = new_node; /* set prev of next node */
+	}
+
+	current_node->next = new_node; /* set next of current node */
+
+	return (new_node); /* return address of new node */
+}
