@@ -27,24 +27,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0); /* return 0 - failure */
 	}
 	index = key_index((unsigned char *)key, ht->size); /* get index of key */
-	new_node = malloc(sizeof(hash_node_t)); /* malloc for new_node */
-	if (new_node == NULL) /* if malloc fails */
-	{
-		return (0); /* return 0 - failure */
-	}
-	new_node->key = strdup(key); /* duplicate key */
-	if (new_node->key == NULL) /* if strdup fails */
-	{
-		return (0); /* return 0 - failure */
-	}
-	new_node->value = duplicate; /* set value of new_node to duplicated value */
-	new_node->next = NULL; /* set next of new_node to NULL */
-	if (ht->array[index] == NULL) /* if index of hash table array is NULL */
-	{
-		ht->array[index] = new_node; /* set index of array to new_node */
-		return (1); /* index of array = new_node */
-	}
-	current_node = ht->array[index]; /* set current_node to head @ index position */
+	current_node = ht->array[index]; /* set traversal ptr to head of linked list */
 	while (current_node != NULL) /* traverse linked list at index position */
 	{
 		if (strcmp(current_node->key, key) == 0) /* if key is found */
@@ -54,6 +37,12 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		}
 		current_node = current_node->next; /* move to next node */
 	}
+	new_node = malloc(sizeof(hash_node_t)); /* malloc for new_node */
+	if (new_node == NULL) /* if malloc fails */
+	{
+		return (0); /* return 0 - failure */
+	}
+	new_node->key = strdup(key); /* duplicate key */
 	new_node->next = ht->array[index]; /* link up new_node to head */
 	ht->array[index] = new_node; /* update head to new_node */
 	return (1); /* return 1 - success */
