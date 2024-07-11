@@ -36,21 +36,14 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 
 	new_node->value = duplicate; /* set value of new_node to duplicated value */
 	new_node->next = NULL; /* set next of new_node to NULL */
-
 	if (ht->array[index] == NULL) /* if index of hash table array is NULL */
-	{
-		ht->array[index] = new_node; /* set index of table array to new_node */
-		return (1); /* return 1 - success */
-	}
+		ht->array[index] = new_node, return (1); /* index of array = new_node */
 
-	current_node = ht->array[index]; /* set current_node to head at index position */
+	current_node = ht->array[index]; /* set current_node to head @ index position */
 	while (current_node != NULL) /* traverse linked list at index position */
 	{
-		if (strcmp(current_node->key, key) == 0) /* if key is found */
-		{
-			current_node->value = duplicate; /* update value to duplicate */
-			return (1); /* return 1 - success */
-		}
+		if (strcmp(current_node->key, key) == 0) /* if key is found */d
+			current_node->value = duplicate, return (1); /* value = duplicate, success */
 
 		current_node = current_node->next; /* move to next node */
 	}
