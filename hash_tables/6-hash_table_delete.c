@@ -15,3 +15,8 @@ void hash_table_delete(hash_table_t *ht)
 	if (ht == NULL) /* if hash table is NULL */
 		return; /* return nothing */
 
+	for (iterator = 0; iterator < ht->size; iterator++) /* traverse array */
+	{
+		current_node = ht->array[iterator]; /* set traversal ptr to head */
+		while (current_node != NULL) /* traverse linked list */
+		{
