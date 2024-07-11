@@ -15,8 +15,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	hash_node_t *new_node = NULL; /* init ptr to node struct, set to NULL */
 	hash_node_t *current_node = NULL; /* init traversal ptr, set to NULL */
 	unsigned long int index = 0; /* init index for hash table array, set to 0 */
-	char *dup_value = NULL; /* init ptr to duplicated value, NULL set */
-	char *dup_key = NULL; /* init ptr to duplicated key, NULL set */
+	char *dup_value, *dup_key; /* init ptrs to duplicated value and key */
 
 	if (!key || !*key || !ht || !value) /* if any parameter is NULL */
 	{
@@ -28,7 +27,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0); /* return 0 - failure */
 	}
 	index = key_index((unsigned char *)key, ht->size); /* get index of key */
-	current_node = ht->array[index]; /* set traversal ptr to head of linked list */
+	current_node = ht->array[index]; /* set traversal ptr to head */
 	while (current_node != NULL) /* traverse linked list at index position */
 	{
 		if (strcmp(current_node->key, key) == 0) /* if key is found */
