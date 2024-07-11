@@ -27,17 +27,40 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	if (duplicate == NULL) /* if strdup fails */
 		return (0); /* return 0 - failure */
 
-	index = key_index(key, ht->size); /* get index of key in hash table array */
+	index = key_index((const unsigned char *)key, ht->size); /* CALL FUNCTION FROM TASK 2 */
 
 	new_node = malloc(sizeof(hash_node_t)); /* malloc for new_node */
 	if (new_node == NULL) /* if malloc fails */
 		return (0); /* return 0 - failure */
 
-	new_node->key = strdup(key); /* set key of new_node to duplicated key */
+	new_node->key = strdup(key); /* duplicate key */
 	if (new_node->key == NULL) /* if strdup fails */
 		return (0); /* return 0 - failure */
 
 	new_node->value = duplicate; /* set value of new_node to duplicated value */
 	new_node->next = NULL; /* set next of new_node to NULL */
 
-	
+	if (ht->array[index] == NULL) /* if index of hash table array is NULL */
+	{
+		ht->array[index] = new_node; /* set index of hash table array to new_node */
+		return (1); /* return 1 - success */
+	}
+
+	current_node = ht->array[index]; /* set current_node to head at index position */
+
+	while (current_node != NULL) /* traverse linked list at index position */
+	{
+		if (strcmp(current_node->key, key) == 0) /* if key is found */
+		{
+			current_node->value = duplicate; /* update value to duplicate */
+			return (1); /* return 1 - success */
+		}
+
+		current_node = current_node->next; /* move to next node */
+	}
+
+	new_node->next = ht->array[index]; /* link up new_node to head */
+	ht->array[index] = new_node; /* update head to new_node */
+
+	return (1); /* return 1 - success */
+}
