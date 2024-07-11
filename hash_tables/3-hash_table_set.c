@@ -15,14 +15,15 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	hash_node_t *new_node = NULL; /* init ptr to node struct, set to NULL */
 	hash_node_t *current_node = NULL; /* init traversal ptr, set to NULL */
 	unsigned long int index = 0; /* init index for hash table array, set to 0 */
-	char *duplicate = NULL; /* init ptr to duplicated value, NULL set */
+	char *dup_value = NULL; /* init ptr to duplicated value, NULL set */
+	char *dup_key = NULL; /* init ptr to duplicated key, NULL set */
 
 	if (!key || !*key || !ht || !value) /* if any parameter is NULL */
 	{
 		return (0); /* return 0 - failure */
 	}
-	duplicate = strdup(value); /* duplicate value of key */
-	if (duplicate == NULL) /* if strdup fails */
+	dup_value = strdup(value); /* duplicate value of key */
+	if (dup_value == NULL) /* if strdup fails */
 	{
 		return (0); /* return 0 - failure */
 	}
@@ -32,7 +33,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	{
 		if (strcmp(current_node->key, key) == 0) /* if key is found */
 		{
-			current_node->value = duplicate; /* update value of key */
+			current_node->value = dup_value; /* update value of key */
 			return (1); /* value = duplicate, success */
 		}
 		current_node = current_node->next; /* move to next node */
@@ -42,7 +43,13 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	{
 		return (0); /* return 0 - failure */
 	}
+	dup_key = strdup(key); /* duplicate key */
+	if (dup_key == NULL) /* if strdup fails */
+	{
+		return (0); /* return 0 - failure */
+	}
 	new_node->key = strdup(key); /* duplicate key */
+	new_node->value = dup_value; /* duplicate value */
 	new_node->next = ht->array[index]; /* link up new_node to head */
 	ht->array[index] = new_node; /* update head to new_node */
 	return (1); /* return 1 - success */
