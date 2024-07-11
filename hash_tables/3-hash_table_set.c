@@ -16,19 +16,27 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	hash_node_t *current_node = NULL; /* init traversal ptr, set to NULL */
 	unsigned long int index = 0; /* init index for hash table array, set to 0 */
 	char *duplicate = NULL; /* init ptr to duplicated value, NULL set */
-	
+
 	if (!key || !*key || !ht || !value) /* if any parameter is NULL */
+	{
 		return (0); /* return 0 - failure */
+	}
 	duplicate = strdup(value); /* duplicate value of key */
 	if (duplicate == NULL) /* if strdup fails */
-		return (0); /* return 0 - failure */d
+	{
+		return (0); /* return 0 - failure */
+	}
 	index = key_index((unsigned char *)key, ht->size); /* get index of key */
 	new_node = malloc(sizeof(hash_node_t)); /* malloc for new_node */
 	if (new_node == NULL) /* if malloc fails */
+	{
 		return (0); /* return 0 - failure */
+	}
 	new_node->key = strdup(key); /* duplicate key */
 	if (new_node->key == NULL) /* if strdup fails */
+	{
 		return (0); /* return 0 - failure */
+	}
 	new_node->value = duplicate; /* set value of new_node to duplicated value */
 	new_node->next = NULL; /* set next of new_node to NULL */
 	if (ht->array[index] == NULL) /* if index of hash table array is NULL */
