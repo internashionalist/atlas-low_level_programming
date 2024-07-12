@@ -51,7 +51,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		free(new_node); /* free new_node */
 		return (0); /* return 0 - failure */
 	}
-	new_node->key = strdup(key); /* duplicate key */
+	new_node->key = dup_key; /* duplicate key */
 	new_node->value = dup_value; /* duplicate value */
 	new_node->next = ht->array[index]; /* link up new_node to head */
 	ht->array[index] = new_node; /* update head to new_node */
