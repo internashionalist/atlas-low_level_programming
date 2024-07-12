@@ -29,4 +29,6 @@ void hash_table_delete(hash_table_t *ht)
 	}
 	free(ht->array); /* free array */
 	free(ht); /* free hash table */
+	free(current_node); /* free current node */
+	free(next_node); /* free next node */
 }
