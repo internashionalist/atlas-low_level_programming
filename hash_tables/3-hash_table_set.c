@@ -32,6 +32,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	{
 		if (strcmp(current_node->key, key) == 0) /* if key is found */
 		{
+			free(current_node->value); /* free old value of key */
 			current_node->value = dup_value; /* update value of key */
 			return (1); /* value = duplicate, success */
 		}
@@ -40,11 +41,14 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	new_node = malloc(sizeof(hash_node_t)); /* malloc for new_node */
 	if (new_node == NULL) /* if malloc fails */
 	{
+		free(dup_value); /* free duplicated value */
 		return (0); /* return 0 - failure */
 	}
 	dup_key = strdup(key); /* duplicate key */
 	if (dup_key == NULL) /* if strdup fails */
 	{
+		free(dup_value); /* free duplicated value */
+		free(new_node); /* free new_node */
 		return (0); /* return 0 - failure */
 	}
 	new_node->key = strdup(key); /* duplicate key */
