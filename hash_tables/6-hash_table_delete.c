@@ -20,17 +20,13 @@ void hash_table_delete(hash_table_t *ht)
 		current_node = ht->array[iterator]; /* set traversal ptr */
 		while (current_node != NULL) /* traverse linked list */
 		{
-			free(current_node->key); /* free key */
-			current_node->key = NULL; /* set key to NULL */
-			free(current_node->value); /* free value */
-			current_node->value = NULL; /* set value to NULL */
 			next_node = current_node->next; /* set next node */
+			free(current_node->key); /* free key */
+			free(current_node->value); /* free value */
 			free(current_node); /* free current node */
 			current_node = next_node; /* set current node to next node */
 		}
 	}
 	free(ht->array); /* free array */
-	ht->array = NULL; /* set array to NULL */
-	ht->size = 0; /* set size to 0 */
 	free(ht); /* free hash table */
 }
