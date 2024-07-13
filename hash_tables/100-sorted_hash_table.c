@@ -74,13 +74,13 @@ void insert_node(shash_table_t *ht, shash_node_t *new_node)
 		while (current->snext && strcmp(new_node->key, current->snext->key) > 0)
 			current = current->snext; /* traverse list */
 
-		new_node->snext = current->snext; /* set new node's next to current's next */
+		new_node->snext = current->snext; /* new node's next to current's next */
 		new_node->sprev = current; /* set new node's prev to current */
 
 		if (current->snext == NULL)	/* insert at tail */
 			ht->stail = new_node; /* set tail to new node */
 		else
-			current->snext->sprev = new_node; /* set next node's prev to new node */
+			current->snext->sprev = new_node; /* set next node's prev */
 
 		current->snext = new_node; /* set current's next to new node */
 	}
@@ -99,7 +99,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	shash_node_t *new_node, *current; /* new node and traversal node */
 	shash_node_t *head = 0; /* head of list */
 
-	if (!ht || !key || !value || *key == '\0') /* if hash table or key is NULL */
+	if (!ht || !key || !value || *key == '\0') /* if anything is NULL */
 		return (0);
 	
 	head = ht->array[index]; /* set head to head of list */
@@ -200,7 +200,7 @@ void shash_table_print_rev(const shash_table_t *ht)
 	printf("{"); /* print opening brace */
 	while (node) /* traverse list */
 	{
-		printf("'%s': '%s'", node->key, node->value); /* print key and value */
+		printf("'%s': '%s'", node->key, node->value); /* print key & value */
 		node = node->sprev; /* move to previous node */
 		if (node) /* if not at beginning of list */
 			printf(", "); /* print comma */
