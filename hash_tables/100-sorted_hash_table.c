@@ -95,14 +95,16 @@ void insert_node(shash_table_t *ht, shash_node_t *new_node)
 
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int index; /* index of array */
+	unsigned long int index = 0; /* index of array */
 	shash_node_t *new_node, *current; /* new node and traversal node */
+	shash_node_t *head = 0; /* head of list */
 
 	if (!ht || !key || !value || *key == '\0') /* if hash table or key is NULL */
 		return (0);
-
+	
+	head = ht->array[index]; /* set head to head of list */
 	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 2 */
-	current = ht->array[index];	/* set current to head of list */
+	current = head; /* set current to head */
 
 	while (current) /* traverse list */
 	{
@@ -120,8 +122,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	if (!new_node) /* if malloc fails */
 		return (0); /* return failure */
 
-	new_node->next = ht->array[index]; /* set new node's next to head */
-	ht->array[index] = new_node; /* set head to new node */
+	new_node->next = head; /* set new node's next to head */
+	head = new_node; /* set head to new node */
 
 	insert_node(ht, new_node); /* insert new node into sorted list */
 
@@ -173,7 +175,7 @@ void shash_table_print(const shash_table_t *ht)
 	printf("{"); /* print opening brace */
 	while (node) /* traverse list */
 	{
-		printf("'%s': '%s'", node->key, node->value); /* print key and value */
+		printf("'%s': '%s'", node->key, node->value);
 		node = node->snext; /* move to next node */
 		if (node) /* if not at end of list */
 			printf(", "); /* print comma */
