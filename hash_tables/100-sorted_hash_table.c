@@ -95,21 +95,19 @@ void insert_node(shash_table_t *ht, shash_node_t *new_node)
 
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int index = 0; /* index of array */
+	unsigned long int index; /* index of array */
 	shash_node_t *new_node, *current; /* new node and traversal node */
 	shash_node_t *head = 0; /* head of list */
 
 	if (!ht || !key || !value || *key == '\0') /* if anything is NULL */
 		return (0);
 	
-	head = ht->array[index]; /* set head to head of list */
 	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 2 */
-	current = head; /* set current to head */
+	current = ht->array[index];	/* set current to head */
 
 	while (current) /* traverse list */
 	{
 		if (strcmp(current->key, key) == 0) /* if key is found */
-
 		{
 			free(current->value); /* free current value */
 			current->value = strdup(value); /* set new value */
@@ -122,8 +120,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	if (!new_node) /* if malloc fails */
 		return (0); /* return failure */
 
-	new_node->next = head; /* set new node's next to head */
-	head = new_node; /* set head to new node */
+	new_node->next = ht->array[index]; /* set new node's next to head */
+	ht->array[index] = new_node; /* set head to new node */
 
 	insert_node(ht, new_node); /* insert new node into sorted list */
 
