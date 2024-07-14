@@ -97,7 +97,6 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index; /* index of array */
 	shash_node_t *new_node, *current; /* new node and traversal node */
-	shash_node_t *head = 0; /* head of list */
 
 	if (!ht || !key || !value || *key == '\0') /* if anything is NULL */
 		return (0);
