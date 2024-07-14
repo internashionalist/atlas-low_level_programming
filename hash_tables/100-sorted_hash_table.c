@@ -9,7 +9,7 @@
 
 shash_table_t *shash_table_create(unsigned long int size)
 {
-	shash_table_t *ht = malloc(sizeof(shash_table_t)); /* malloc for struct */
+	shash_table_t *ht = malloc(sizeof(shash_table_t)); /* malloc new table */
 
 	if (ht == NULL) /* if malloc fails */
 		return (NULL); /* return NULL - failure */
@@ -18,16 +18,16 @@ shash_table_t *shash_table_create(unsigned long int size)
 	ht->array = malloc(sizeof(shash_node_t *) * size); /* malloc array */
 	if (ht->array == NULL) /* if malloc fails */
 	{
-		free(ht); /* free hash table */
+		free(ht); /* free hash table's memory */
 		return (NULL); /* return NULL - failure */
 	}
-	ht->shead = NULL; /* NULLify head */
-	ht->stail = NULL; /* NULLify tail */
+	ht->shead = NULL; /* NULLify sorted head to empty table */
+	ht->stail = NULL; /* NULLify sorted tail too */
 	return (ht); /* return brand spankin new sorted hash table */
 }
 
 /**
- * create_node - creates a new node
+ * create_node - helper function to create a new node
  * @key: key to add to node
  * @value: value to add to node
  *
@@ -36,31 +36,42 @@ shash_table_t *shash_table_create(unsigned long int size)
 
 shash_node_t *create_node(const char *key, const char *value)
 {
-	shash_node_t *new_node = malloc(sizeof(shash_node_t));
+	shash_node_t *new_node = malloc(sizeof(shash_node_t)); /* malloc new node */
 
 	if (!new_node) /* if malloc fails */
 		return (NULL); /* return NULL - failure */
 
 	new_node->key = strdup(key); /* set key */
+	if (!new_node->key) /* if strdup fails */
+	{
+		free(new_node); /* free new node */
+		return (NULL); /* return NULL - failure */
+	}
 	new_node->value = strdup(value); /* set value */
+	if (!new_node->value) /* if strdup fails */
+	{
+		free(new_node->key); /* free key */
+		free(new_node); /* free new node */
+		return (NULL); /* return NULL - failure */
+	}
 	new_node->next = NULL; /* NULLify next */
 	new_node->sprev = NULL; /* NULLify prev */
 	new_node->snext = NULL; /* NULLify next */
 
-	return (new_node); /* return new node */
+	return (new_node); /* return fresh new node */
 }
 
 /**
- * insert_node - inserts a node into a sorted linked list
- * @ht: pointer to the sorted hash table
- * @new_node: pointer to the node to insert
+ * insert_node - helper function to insert a node into a sorted hash table
+ * @ht: pointer to sorted hash table
+ * @new_node: pointer to new node being inserted
  *
  * Return: void
  */
 
 void insert_node(shash_table_t *ht, shash_node_t *new_node)
 {
-	shash_node_t *current; /* traversal node */
+	shash_node_t *trav_node; /* traversal node */
 
 	if (ht->shead == NULL) /* if list is empty */
 	{
@@ -75,19 +86,19 @@ void insert_node(shash_table_t *ht, shash_node_t *new_node)
 	}
 	else /* insert in middle or at tail */
 	{
-		current = ht->shead; /* set current to head */
-		while (current->snext && strcmp(new_node->key, current->snext->key) > 0)
-			current = current->snext; /* traverse list */
+		trav_node = ht->shead; /* set trav_node to head */
+		while (trav_node->snext && strcmp(new_node->key, trav_node->snext->key) > 0)
+			trav_node = trav_node->snext; /* traverse list */
 
-		new_node->snext = current->snext; /* new node's next to current's next */
-		new_node->sprev = current; /* set new node's prev to current */
+		new_node->snext = trav_node->snext; /* new node's next to trav_node's next */
+		new_node->sprev = trav_node; /* set new node's prev to trav_node */
 
-		if (current->snext == NULL)	/* insert at tail */
+		if (trav_node->snext == NULL)	/* insert at tail */
 			ht->stail = new_node; /* set tail to new node */
 		else
-			current->snext->sprev = new_node; /* set next node's prev */
+			trav_node->snext->sprev = new_node; /* set next node's prev */
 
-		current->snext = new_node; /* set current's next to new node */
+		trav_node->snext = new_node; /* set trav_node's next to new node */
 	}
 }
 /**
@@ -102,35 +113,36 @@ void insert_node(shash_table_t *ht, shash_node_t *new_node)
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index; /* index of array */
-	shash_node_t *new_node, *current; /* new node and traversal node */
+	shash_node_t *new_node; /* new node */
+	shash_node_t *trav_node; /* traversal node */
 
 	if (!ht || !key || !value || *key == '\0') /* if anything is NULL */
 		return (0);
 
-	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 2 */
-	current = ht->array[index];	/* set current to head */
+	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 1 */
+	trav_node = ht->array[index];	/* set trav_node to head */
 
-	while (current) /* traverse list */
+	while (trav_node) /* traverse list */
 	{
-		if (strcmp(current->key, key) == 0) /* if key is found */
+		if (strcmp(trav_node->key, key) == 0) /* if key is found */
 		{
-			free(current->value); /* free current value */
-			current->value = strdup(value); /* set new value */
+			free(trav_node->value); /* free old trav_node value */
+			trav_node->value = strdup(value); /* set new value */
 			return (1); /* return success */
 		}
-		current = current->next; /* traverse list */
+		trav_node = trav_node->next; /* traverse until key found */
 	}
 
-	new_node = create_node(key, value); /* create new node */
-	if (!new_node) /* if malloc fails */
-		return (0); /* return failure */
+	new_node = create_node(key, value); /* create new node using key and value */
+	if (!new_node) /* if create_node fails */
+		return (0); /* return 0 - failure */
 
-	new_node->next = ht->array[index]; /* set new node's next to head */
+	new_node->next = ht->array[index]; /* set new node's next to head node */
 	ht->array[index] = new_node; /* set head to new node */
 
 	insert_node(ht, new_node); /* insert new node into sorted list */
 
-	return (1); /* return success */
+	return (1); /* return 1 - success */
 }
 
 /**
@@ -144,19 +156,19 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 char *shash_table_get(const shash_table_t *ht, const char *key)
 {
 	unsigned long int index; /* index of array */
-	shash_node_t *node; /* traversal node */
+	shash_node_t *trav_node; /* traversal node */
 
 	if (!ht || !key || *key == '\0') /* if hash table or key is NULL */
 		return (NULL); /* return NULL */
 
 	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 1 */
-	node = ht->array[index]; /* set node to head of list */
+	trav_node = ht->array[index]; /* set node to head of list */
 
-	while (node) /* traverse list */
+	while (trav_node) /* traverse list */
 	{
-		if (strcmp(node->key, key) == 0) /* if key is found */
-			return (node->value); /* return value */
-		node = node->next; /* or keep on movin */
+		if (strcmp(trav_node->key, key) == 0) /* if key is found */
+			return (trav_node->value); /* return value */
+		trav_node = trav_node->next; /* or keep on movin */
 	}
 
 	return (NULL); /* return NULL if key not found */
@@ -171,18 +183,18 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 
 void shash_table_print(const shash_table_t *ht)
 {
-	shash_node_t *node; /* traversal node */
+	shash_node_t *trav_node; /* traversal node */
 
-	if (!ht) /* if hash table is NULL */
-		return; /* return */
+	if (!ht) /* if there's no hash table */
+		return; /* return nothing */
 
-	node = ht->shead; /* set node to head of sorted list */
+	trav_node = ht->shead; /* init trav_node to sorted head */
 	printf("{"); /* print opening brace */
-	while (node) /* traverse list */
+	while (trav_node) /* traverse list */
 	{
-		printf("'%s': '%s'", node->key, node->value);
-		node = node->snext; /* move to next node */
-		if (node) /* if not at end of list */
+		printf("'%s': '%s'", trav_node->key, trav_node->value);
+		trav_node = trav_node->snext; /* move to next node */
+		if (trav_node) /* if not at end of list */
 			printf(", "); /* print comma */
 	}
 	printf("}\n"); /* print closing brace */
@@ -197,18 +209,18 @@ void shash_table_print(const shash_table_t *ht)
 
 void shash_table_print_rev(const shash_table_t *ht)
 {
-	shash_node_t *node; /* traversal node */
+	shash_node_t *trav_node; /* traversal node */
 
-	if (!ht) /* if hash table is NULL */
-		return; /* return */
+	if (!ht) /* if there's no hash table */
+		return; /* return nothing */
 
-	node = ht->stail; /* set node to tail */
+	trav_node = ht->stail; /* init node to sorted tail */
 	printf("{"); /* print opening brace */
-	while (node) /* traverse list */
+	while (trav_node) /* traverse list */
 	{
-		printf("'%s': '%s'", node->key, node->value); /* print key & value */
-		node = node->sprev; /* move to previous node */
-		if (node) /* if not at beginning of list */
+		printf("'%s': '%s'", trav_node->key, trav_node->value);
+		trav_node = trav_node->sprev; /* move back to previous node */
+		if (trav_node) /* if not at head yet */
 			printf(", "); /* print comma */
 	}
 	printf("}\n"); /* print closing brace */
@@ -224,24 +236,23 @@ void shash_table_print_rev(const shash_table_t *ht)
 void shash_table_delete(shash_table_t *ht)
 {
 	unsigned long int i; /* index */
-	shash_node_t *node, *tmp; /* traversal node and temp node */
+	shash_node_t *trav_node, *temp_node; /* traversal, storage nodes */
 
-	if (!ht) /* if hash table is NULL */
-		return; /* return */
+	if (!ht) /* if there's no hash table */
+		return; /* return nothing */
 
 	for (i = 0; i < ht->size; i++) /* traverse array */
 	{
-		node = ht->array[i]; /* set node to head of list */
-		while (node) /* traverse list */
+		trav_node = ht->array[i]; /* place trav_node at head */
+		while (trav_node) /* traverse list */
 		{
-			tmp = node; /* set tmp to node */
-			node = node->next; /* move to next node */
-			free(tmp->key); /* free key */
-			free(tmp->value); /* free value */
-			free(tmp); /* free node */
+			temp_node = trav_node; /* store current node */
+			trav_node = trav_node->next; /* move on to next node */
+			free(temp_node->key); /* free key's memory */
+			free(temp_node->value); /* free value's memory */
+			free(temp_node); /* free current node's memory */
 		}
 	}
-
-	free(ht->array); /* free array */
-	free(ht); /* free hash table */
+	free(ht->array); /* free array's memory */
+	free(ht); /* free hash table's memory */
 }
