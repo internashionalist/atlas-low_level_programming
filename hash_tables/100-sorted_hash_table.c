@@ -1,6 +1,7 @@
 #include "hash_tables.h"
 
-/* shash_table_create - creates a sorted hash table
+/**
+ * shash_table_create - creates a sorted hash table
  * @size: size of the array
  *
  * Return: a pointer to the newly created SORTED hash table
@@ -9,6 +10,7 @@
 shash_table_t *shash_table_create(unsigned long int size)
 {
 	shash_table_t *ht = malloc(sizeof(shash_table_t)); /* malloc for struct */
+
 	if (ht == NULL) /* if malloc fails */
 		return (NULL); /* return NULL - failure */
 
@@ -24,7 +26,8 @@ shash_table_t *shash_table_create(unsigned long int size)
 	return (ht); /* return brand spankin new sorted hash table */
 }
 
-/* create_node - creates a new node
+/**
+ * create_node - creates a new node
  * @key: key to add to node
  * @value: value to add to node
  *
@@ -34,6 +37,7 @@ shash_table_t *shash_table_create(unsigned long int size)
 shash_node_t *create_node(const char *key, const char *value)
 {
 	shash_node_t *new_node = malloc(sizeof(shash_node_t));
+
 	if (!new_node) /* if malloc fails */
 		return (NULL); /* return NULL - failure */
 
@@ -46,7 +50,8 @@ shash_node_t *create_node(const char *key, const char *value)
 	return (new_node); /* return new node */
 }
 
-/* insert_node - inserts a node into a sorted linked list
+/**
+ * insert_node - inserts a node into a sorted linked list
  * @ht: pointer to the sorted hash table
  * @new_node: pointer to the node to insert
  *
@@ -85,7 +90,8 @@ void insert_node(shash_table_t *ht, shash_node_t *new_node)
 		current->snext = new_node; /* set current's next to new node */
 	}
 }
-/* shash_table_set - adds an element to a sorted hash table
+/**
+ * shash_table_set - adds an element to a sorted hash table
  * @ht: pointer to the sorted hash table
  * @key: key to add
  * @value: value to add
@@ -100,7 +106,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 	if (!ht || !key || !value || *key == '\0') /* if anything is NULL */
 		return (0);
-	
+
 	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 2 */
 	current = ht->array[index];	/* set current to head */
 
@@ -127,7 +133,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	return (1); /* return success */
 }
 
-/* shash_table_get - retrieves a value associated with a key
+/**
+ * shash_table_get - retrieves a value associated with a key
  * @ht: pointer to the sorted hash table
  * @key: key to search for
  *
@@ -155,7 +162,8 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 	return (NULL); /* return NULL if key not found */
 }
 
-/* shash_table_print - prints a sorted hash table
+/**
+ * shash_table_print - prints a sorted hash table
  * @ht: pointer to the sorted hash table
  *
  * Return: void
@@ -180,7 +188,8 @@ void shash_table_print(const shash_table_t *ht)
 	printf("}\n"); /* print closing brace */
 }
 
-/* shash_table_print_rev - prints a sorted hash table in reverse
+/**
+ * shash_table_print_rev - prints a sorted hash table in reverse
  * @ht: pointer to the sorted hash table
  *
  * Return: void
@@ -205,7 +214,8 @@ void shash_table_print_rev(const shash_table_t *ht)
 	printf("}\n"); /* print closing brace */
 }
 
-/* shash_table_delete - deletes a sorted hash table
+/**
+ * shash_table_delete - deletes a sorted hash table
  * @ht: pointer to the sorted hash table
  *
  * Return: void
