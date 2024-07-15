@@ -9,7 +9,7 @@
 
 void hash_table_print(const hash_table_t *ht)
 {
-	hash_node_t *node = NULL; /* traversal ptr for nodes */
+	hash_node_t *trav_node = NULL; /* traversal ptr for nodes */
 	unsigned long int iterator; /* iterator for array */
 	int first = 1; /* flag for comma */
 
@@ -20,14 +20,14 @@ void hash_table_print(const hash_table_t *ht)
 
 	for (iterator = 0; iterator < ht->size; iterator++) /* traverse array */
 	{
-		node = ht->array[iterator]; /* set traversal ptr to head */
-		while (node != NULL) /* traverse linked list */
+		trav_node = ht->array[iterator]; /* set traversal ptr to head */
+		while (trav_node != NULL) /* traverse linked list */
 		{
 			if (first == 0) /* if not first node */
 				printf(", "); /* print comma and a space */
-			printf("'%s': '%s'", node->key, node->value); /* print key/value */
+			printf("'%s': '%s'", trav_node->key, trav_node->value); /* print key/value */
 			first = 0; /* set flag to 0 after first node */
-			node = node->next; /* move to next node */
+			trav_node = trav_node->next; /* move to next node */
 		}
 	}
 	printf("}\n"); /* print last brace */
