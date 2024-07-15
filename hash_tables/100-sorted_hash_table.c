@@ -54,9 +54,9 @@ shash_node_t *create_node(const char *key, const char *value)
 		free(new_node); /* free new node */
 		return (NULL); /* return NULL - failure */
 	}
-	new_node->next = NULL; /* NULLify next */
-	new_node->sprev = NULL; /* NULLify prev */
-	new_node->snext = NULL; /* NULLify next */
+	new_node->next = NULL; /* set new node's next to NULL */
+	new_node->sprev = NULL; /* set prev to NULL */
+	new_node->snext = NULL; /* set sorted next to NULL */
 
 	return (new_node); /* return fresh new node */
 }
@@ -78,27 +78,27 @@ void insert_node(shash_table_t *ht, shash_node_t *new_node)
 		ht->shead = new_node; /* set head and tail to new node */
 		ht->stail = new_node;
 	}
-	else if (strcmp(new_node->key, ht->shead->key) < 0) /* insert at head */
+	else if (strcmp(new_node->key, ht->shead->key) < 0) /* if inserting at head */
 	{
 		new_node->snext = ht->shead; /* set new node's next to head */
 		ht->shead->sprev = new_node; /* set head's prev to new node */
-		ht->shead = new_node; /* set head to new node */
+		ht->shead = new_node; /* make new node the head */
 	}
-	else /* insert in middle or at tail */
+	else /* if inserting in middle or at tail */
 	{
 		trav_node = ht->shead; /* set trav_node to head */
 		while (trav_node->snext && strcmp(new_node->key, trav_node->snext->key) > 0)
-			trav_node = trav_node->snext; /* traverse list */
+			trav_node = trav_node->snext; /* traverse list until insertion point */
 
 		new_node->snext = trav_node->snext; /* new node's next to trav_node's next */
 		new_node->sprev = trav_node; /* set new node's prev to trav_node */
 
-		if (trav_node->snext == NULL)	/* insert at tail */
+		if (trav_node->snext == NULL) /* if inserting at tail */
 			ht->stail = new_node; /* set tail to new node */
 		else
-			trav_node->snext->sprev = new_node; /* set next node's prev */
+			trav_node->snext->sprev = new_node; /* set next node's prev to new node */
 
-		trav_node->snext = new_node; /* set trav_node's next to new node */
+		trav_node->snext = new_node; /* then trav_node's next to new node */
 	}
 }
 /**
@@ -112,25 +112,25 @@ void insert_node(shash_table_t *ht, shash_node_t *new_node)
 
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int index; /* index of array */
+	unsigned long int index; /* index iterator */
 	shash_node_t *new_node; /* new node */
-	shash_node_t *trav_node; /* traversal node */
+	shash_node_t *trav_node; /* list traversal node */
 
-	if (!ht || !key || !value || *key == '\0') /* if anything is NULL */
-		return (0);
+	if (!ht || !key || !value || *key == '\0') /* if anything's missing */
+		return (0); /* return 0 - failure */
 
 	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 1 */
-	trav_node = ht->array[index];	/* set trav_node to head */
+	trav_node = ht->array[index]; /* set trav_node to head */
 
-	while (trav_node) /* traverse list */
+	while (trav_node) /* traverse bucket list */
 	{
 		if (strcmp(trav_node->key, key) == 0) /* if key is found */
 		{
 			free(trav_node->value); /* free old trav_node value */
-			trav_node->value = strdup(value); /* set new value */
-			return (1); /* return success */
+			trav_node->value = strdup(value); /* set value to given value */
+			return (1); /* return 1 - success */
 		}
-		trav_node = trav_node->next; /* traverse until key found */
+		trav_node = trav_node->next; /* or traverse until key found */
 	}
 
 	new_node = create_node(key, value); /* create new node using key and value */
@@ -155,14 +155,14 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 char *shash_table_get(const shash_table_t *ht, const char *key)
 {
-	unsigned long int index; /* index of array */
+	unsigned long int index; /* index iterator */
 	shash_node_t *trav_node; /* traversal node */
 
-	if (!ht || !key || *key == '\0') /* if hash table or key is NULL */
+	if (!ht || !key || *key == '\0') /* if there's no hash table or key */
 		return (NULL); /* return NULL */
 
 	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 1 */
-	trav_node = ht->array[index]; /* set node to head of list */
+	trav_node = ht->array[index]; /* point trav_node to head */
 
 	while (trav_node) /* traverse list */
 	{
@@ -183,12 +183,12 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 
 void shash_table_print(const shash_table_t *ht)
 {
-	shash_node_t *trav_node; /* traversal node */
+	shash_node_t *trav_node; /* hash table traversal node */
 
 	if (!ht) /* if there's no hash table */
 		return; /* return nothing */
 
-	trav_node = ht->shead; /* init trav_node to sorted head */
+	trav_node = ht->shead; /* point trav_node to head */
 	printf("{"); /* print opening brace */
 	while (trav_node) /* traverse list */
 	{
@@ -209,17 +209,17 @@ void shash_table_print(const shash_table_t *ht)
 
 void shash_table_print_rev(const shash_table_t *ht)
 {
-	shash_node_t *trav_node; /* traversal node */
+	shash_node_t *trav_node; /* list traversal node */
 
 	if (!ht) /* if there's no hash table */
 		return; /* return nothing */
 
-	trav_node = ht->stail; /* init node to sorted tail */
+	trav_node = ht->stail; /* place trav_node at tail */
 	printf("{"); /* print opening brace */
-	while (trav_node) /* traverse list */
+	while (trav_node) /* traverse bucket list */
 	{
 		printf("'%s': '%s'", trav_node->key, trav_node->value);
-		trav_node = trav_node->sprev; /* move back to previous node */
+		trav_node = trav_node->sprev; /* move backwards to previous node */
 		if (trav_node) /* if not at head yet */
 			printf(", "); /* print comma */
 	}
@@ -235,19 +235,19 @@ void shash_table_print_rev(const shash_table_t *ht)
 
 void shash_table_delete(shash_table_t *ht)
 {
-	unsigned long int i; /* index */
-	shash_node_t *trav_node, *temp_node; /* traversal, storage nodes */
+	unsigned long int index; /* index iterator */
+	shash_node_t *trav_node, *temp_node; /* linked list traversal, storage nodes */
 
 	if (!ht) /* if there's no hash table */
 		return; /* return nothing */
 
-	for (i = 0; i < ht->size; i++) /* traverse array */
+	for (index = 0; index < ht->size; index++) /* traverse hash table array of buckets */
 	{
-		trav_node = ht->array[i]; /* place trav_node at head */
+		trav_node = ht->array[index]; /* place trav_node at head of bucket list */
 		while (trav_node) /* traverse list */
 		{
 			temp_node = trav_node; /* store current node */
-			trav_node = trav_node->next; /* move on to next node */
+			trav_node = trav_node->next; /* move traversal pointer to next node */
 			free(temp_node->key); /* free key's memory */
 			free(temp_node->value); /* free value's memory */
 			free(temp_node); /* free current node's memory */
