@@ -40,24 +40,18 @@ shash_node_t *create_node(const char *key, const char *value)
 
 	if (!new_node) /* if malloc fails */
 		return (NULL); /* return NULL - failure */
-
 	new_node->key = strdup(key); /* set key */
-	if (!new_node->key) /* if strdup fails */
-	{
-		free(new_node); /* free new node */
-		return (NULL); /* return NULL - failure */
-	}
 	new_node->value = strdup(value); /* set value */
-	if (!new_node->value) /* if strdup fails */
+	if (!new_node->key || !new_node->value) /* if strdup fails */
 	{
-		free(new_node->key); /* free key */
-		free(new_node); /* free new node */
+		free(new_node->key); /* free key's memory */
+		free(new_node->value); /* free value's memory */
+		free(new_node); /* free new node's memory */
 		return (NULL); /* return NULL - failure */
 	}
 	new_node->next = NULL; /* set new node's next to NULL */
 	new_node->sprev = NULL; /* set prev to NULL */
 	new_node->snext = NULL; /* set sorted next to NULL */
-
 	return (new_node); /* return fresh new node */
 }
 
@@ -89,15 +83,12 @@ void insert_node(shash_table_t *ht, shash_node_t *new_node)
 		trav_node = ht->shead; /* set trav_node to head */
 		while (trav_node->snext && strcmp(new_node->key, trav_node->snext->key) > 0)
 			trav_node = trav_node->snext; /* traverse list until insertion point */
-
 		new_node->snext = trav_node->snext; /* new node's next to trav_node's next */
 		new_node->sprev = trav_node; /* set new node's prev to trav_node */
-
 		if (trav_node->snext == NULL) /* if inserting at tail */
 			ht->stail = new_node; /* set tail to new node */
 		else
 			trav_node->snext->sprev = new_node; /* set next node's prev to new node */
-
 		trav_node->snext = new_node; /* then trav_node's next to new node */
 	}
 }
@@ -118,10 +109,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 	if (!ht || !key || !value || *key == '\0') /* if anything's missing */
 		return (0); /* return 0 - failure */
-
 	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 1 */
 	trav_node = ht->array[index]; /* set trav_node to head */
-
 	while (trav_node) /* traverse bucket list */
 	{
 		if (strcmp(trav_node->key, key) == 0) /* if key is found */
@@ -132,16 +121,12 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		}
 		trav_node = trav_node->next; /* or traverse until key found */
 	}
-
 	new_node = create_node(key, value); /* create new node using key and value */
 	if (!new_node) /* if create_node fails */
 		return (0); /* return 0 - failure */
-
 	new_node->next = ht->array[index]; /* set new node's next to head node */
 	ht->array[index] = new_node; /* set head to new node */
-
 	insert_node(ht, new_node); /* insert new node into sorted list */
-
 	return (1); /* return 1 - success */
 }
 
@@ -160,17 +145,14 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 
 	if (!ht || !key || *key == '\0') /* if there's no hash table or key */
 		return (NULL); /* return NULL */
-
 	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 1 */
 	trav_node = ht->array[index]; /* point trav_node to head */
-
 	while (trav_node) /* traverse list */
 	{
 		if (strcmp(trav_node->key, key) == 0) /* if key is found */
 			return (trav_node->value); /* return value */
 		trav_node = trav_node->next; /* or keep on movin */
 	}
-
 	return (NULL); /* return NULL if key not found */
 }
 
@@ -187,7 +169,6 @@ void shash_table_print(const shash_table_t *ht)
 
 	if (!ht) /* if there's no hash table */
 		return; /* return nothing */
-
 	trav_node = ht->shead; /* point trav_node to head */
 	printf("{"); /* print opening brace */
 	while (trav_node) /* traverse list */
@@ -240,7 +221,6 @@ void shash_table_delete(shash_table_t *ht)
 
 	if (!ht) /* if there's no hash table */
 		return; /* return nothing */
-
 	for (index = 0; index < ht->size; index++) /* traverse hash table array of buckets */
 	{
 		trav_node = ht->array[index]; /* place trav_node at head of bucket list */
