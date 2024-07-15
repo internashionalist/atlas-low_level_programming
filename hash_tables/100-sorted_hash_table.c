@@ -21,7 +21,7 @@ shash_table_t *shash_table_create(unsigned long int size)
 		free(ht); /* free hash table's memory */
 		return (NULL); /* return NULL - failure */
 	}
-	ht->shead = NULL; /* NULLify sorted head to empty table */
+	ht->shead = NULL; /* NULLify sorted head to empty the table */
 	ht->stail = NULL; /* NULLify sorted tail too */
 	return (ht); /* return brand spankin new sorted hash table */
 }
@@ -65,7 +65,7 @@ shash_node_t *create_node(const char *key, const char *value)
 
 void insert_node(shash_table_t *ht, shash_node_t *new_node)
 {
-	shash_node_t *trav_node; /* pointer to traverse list */
+	shash_node_t *trav_node; /* pointer to list traversal node */
 
 	if (ht->shead == NULL) /* if list is empty */
 	{
@@ -104,14 +104,14 @@ void insert_node(shash_table_t *ht, shash_node_t *new_node)
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index; /* index iterator */
-	shash_node_t *new_node; /* new node */
-	shash_node_t *trav_node; /* list traversal node */
+	shash_node_t *new_node; /* pointer to new node */
+	shash_node_t *trav_node; /* pointer to list traversal node */
 
 	if (!ht || !key || !value || *key == '\0') /* if anything's missing */
 		return (0); /* return 0 - failure */
-	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 1 */
-	trav_node = ht->array[index]; /* set trav_node to head */
-	while (trav_node) /* traverse bucket list */
+	index = hash_djb2((const unsigned char *)key) % ht->size; /* generate index */
+	trav_node = ht->array[index]; /* point traveral node to head */
+	while (trav_node) /* traverse list */
 	{
 		if (strcmp(trav_node->key, key) == 0) /* if key is found */
 		{
@@ -140,13 +140,13 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 char *shash_table_get(const shash_table_t *ht, const char *key)
 {
-	unsigned long int index; /* index iterator */
-	shash_node_t *trav_node; /* traversal node */
+	unsigned long int index; /* index position */
+	shash_node_t *trav_node; /* pointer to list traversal node */
 
 	if (!ht || !key || *key == '\0') /* if there's no hash table or key */
 		return (NULL); /* return NULL */
 	index = hash_djb2((const unsigned char *)key) % ht->size; /* generate index */
-	trav_node = ht->array[index]; /* set trav_node to head of bucket list */
+	trav_node = ht->array[index]; /* set traveral node to head */
 	while (trav_node) /* traverse list */
 	{
 		if (strcmp(trav_node->key, key) == 0) /* if key is found */
@@ -165,7 +165,7 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 
 void shash_table_print(const shash_table_t *ht)
 {
-	shash_node_t *trav_node; /* hash table traversal node */
+	shash_node_t *trav_node; /* pointer to list traversal node */
 
 	if (!ht) /* if there's no hash table */
 		return; /* return nothing */
@@ -174,9 +174,9 @@ void shash_table_print(const shash_table_t *ht)
 	while (trav_node) /* traverse list */
 	{
 		printf("'%s': '%s'", trav_node->key, trav_node->value);
-		trav_node = trav_node->snext; /* move to next node */
+		trav_node = trav_node->snext; /* move traversal pointer to next node */
 		if (trav_node) /* if not at end of list */
-			printf(", "); /* print comma */
+			printf(", "); /* print comma and space */
 	}
 	printf("}\n"); /* print closing brace */
 }
@@ -190,14 +190,14 @@ void shash_table_print(const shash_table_t *ht)
 
 void shash_table_print_rev(const shash_table_t *ht)
 {
-	shash_node_t *trav_node; /* list traversal node */
+	shash_node_t *trav_node; /* pointer to list traversal node */
 
 	if (!ht) /* if there's no hash table */
 		return; /* return nothing */
 
 	trav_node = ht->stail; /* place trav_node at tail */
 	printf("{"); /* print opening brace */
-	while (trav_node) /* traverse bucket list */
+	while (trav_node) /* traverse list */
 	{
 		printf("'%s': '%s'", trav_node->key, trav_node->value);
 		trav_node = trav_node->sprev; /* move backwards to previous node */
@@ -217,7 +217,7 @@ void shash_table_print_rev(const shash_table_t *ht)
 void shash_table_delete(shash_table_t *ht)
 {
 	unsigned long int index; /* index iterator */
-	shash_node_t *trav_node, *temp_node; /* linked list traversal, storage nodes */
+	shash_node_t *trav_node, *temp_node; /* pointers to traversal and storage nodes */
 
 	if (!ht) /* if there's no hash table */
 		return; /* return nothing */
