@@ -40,8 +40,8 @@ shash_node_t *create_node(const char *key, const char *value)
 
 	if (!new_node) /* if malloc fails */
 		return (NULL); /* return NULL - failure */
-	new_node->key = strdup(key); /* set key */
-	new_node->value = strdup(value); /* set value */
+	new_node->key = strdup(key); /* set key to given key */
+	new_node->value = strdup(value); /* set value to given value */
 	if (!new_node->key || !new_node->value) /* if strdup fails */
 	{
 		free(new_node->key); /* free key's memory */
@@ -49,10 +49,10 @@ shash_node_t *create_node(const char *key, const char *value)
 		free(new_node); /* free new node's memory */
 		return (NULL); /* return NULL - failure */
 	}
-	new_node->next = NULL; /* set new node's next to NULL */
-	new_node->sprev = NULL; /* set prev to NULL */
-	new_node->snext = NULL; /* set sorted next to NULL */
-	return (new_node); /* return fresh new node */
+	new_node->next = NULL; /* remove dangling pointers */
+	new_node->sprev = NULL; /* this one too */
+	new_node->snext = NULL; /* remove sorted pointer too */
+	return (new_node); /* return fresh new node with key and value */
 }
 
 /**
@@ -65,7 +65,7 @@ shash_node_t *create_node(const char *key, const char *value)
 
 void insert_node(shash_table_t *ht, shash_node_t *new_node)
 {
-	shash_node_t *trav_node; /* traversal node */
+	shash_node_t *trav_node; /* pointer to traverse list */
 
 	if (ht->shead == NULL) /* if list is empty */
 	{
@@ -145,12 +145,12 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 
 	if (!ht || !key || *key == '\0') /* if there's no hash table or key */
 		return (NULL); /* return NULL */
-	index = hash_djb2((const unsigned char *)key) % ht->size; /* TASK 1 */
-	trav_node = ht->array[index]; /* point trav_node to head */
+	index = hash_djb2((const unsigned char *)key) % ht->size; /* generate index */
+	trav_node = ht->array[index]; /* set trav_node to head of bucket list */
 	while (trav_node) /* traverse list */
 	{
 		if (strcmp(trav_node->key, key) == 0) /* if key is found */
-			return (trav_node->value); /* return value */
+			return (trav_node->value); /* return key's value */
 		trav_node = trav_node->next; /* or keep on movin */
 	}
 	return (NULL); /* return NULL if key not found */
