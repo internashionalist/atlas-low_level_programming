@@ -1,8 +1,7 @@
 #include "search_algos.h"
 
 /**
- * linear_search - searches for a value in an array of integers using the
- * linear search algorithm
+ * linear_search - searches for a value in an array of integers
  * @array: pointer to the first element of the array being searched
  * @size: number of elements in array
  * @value: value being searched for
