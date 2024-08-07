@@ -1,23 +1,21 @@
 #include "search_algos.h"
 
 /**
- * print_array - prints an array of integers
- * @array: pointer to the first element of the array to print
- * @size: number of elements in array
- *
- * Return: void
+ * print_array - prints integer array in specific format
+ * @array: array of integers
+ * @left: starting index to be printed
+ * @right: ending index to be printed
  */
-
-void print_array(const int *array, size_t size)
+void print_array(int *array, size_t left, size_t right)
 {
-       size_t i = 0; /* index */
+       size_t i; /* index */
 
-       while (array && i < size) /* iterate through array */
+       printf("Searching in array: "); /* print array */
+       for (i = left; i <= right; i++)
        {
-              if (i > 0) /* if not first element */
-                     printf(", "); /* print comma and space */
-              printf("%d", array[i]); /* print element */
-              i++; /* increment index */
+              if (i != left)
+                     printf(", ");
+              printf("%d", array[i]);
        }
-       printf("\n"); /* print newline */
+       printf("\n");
 }
