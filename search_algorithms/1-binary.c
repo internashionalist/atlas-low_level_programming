@@ -18,4 +18,16 @@ int binary_search(int *array, size_t size, int value)
 	if (array == NULL) /* if array is NULL */
 		return (-1); /* indicate value not found */
 
-
+	while (left <= right) /* iterate through array */
+	{
+		print_array(array, left, right); /* print array */
+		mid = (left + right) / 2; /* calculate middle index */
+		if (array[mid] < value) /* if value is in right half */
+			left = mid + 1; /* move left index to mid */
+		else if (array[mid] > value) /* if value is in left half */
+			right = mid - 1; /* move right index to mid */
+		else /* if value is found */
+			return (mid); /* return index where found */
+	}
+	return (-1); /* otherwise indicate value not found */
+}
