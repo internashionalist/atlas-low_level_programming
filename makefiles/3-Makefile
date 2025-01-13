@@ -1,0 +1,34 @@
+# compiler and files
+CC = gcc
+SRC = main.c school.c
+OBJ = $(SRC:.c=.o)
+NAME = school
+RM = rm -f
+
+# phony targets
+.PHONY: all clean oclean fclean re
+
+# rule default
+all: $(NAME)
+
+# builds executable
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+
+# compiles .c into .o
+%.o : %.c
+	$(CC) -c $< -o $@
+
+# cleans executable and temps
+clean:
+	$(RM) $(NAME) *~
+
+# cleans object files
+oclean:
+	$(RM) $(OBJ)
+
+# total clean
+fclean: clean oclean
+
+# forces recompilation of all source files
+re: fclean all
