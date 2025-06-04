@@ -217,11 +217,11 @@ void shash_table_print_rev(const shash_table_t *ht)
 void shash_table_delete(shash_table_t *ht)
 {
 	unsigned long int index; /* index iterator */
-	shash_node_t *trav_node, *temp_node; /* pointers to traversal and storage nodes */
+	shash_node_t *trav_node, *temp_node; /* pointers to traversal & storage nodes */
 
 	if (!ht) /* if there's no hash table */
 		return; /* return nothing */
-	for (index = 0; index < ht->size; index++) /* traverse hash table array of buckets */
+	for (index = 0; index < ht->size; index++) /* traverse array of buckets */
 	{
 		trav_node = ht->array[index]; /* place trav_node at head of bucket list */
 		while (trav_node) /* traverse list */
