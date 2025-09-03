@@ -9,6 +9,8 @@
 	(size_t)((lo) + (((double)((hi) - (lo)) / (double)((arr)[hi] - \
 	(arr)[lo])) * (double)((val) - (arr)[lo]))) : (size_t)(lo))
 
+#define SMALL(a, b) (((a) < (b)) ? (a) : (b))
+
 int linear_search(int *, size_t, int);
 int binary_search(int *, size_t, int);
 void print_array(int *, size_t, size_t);
